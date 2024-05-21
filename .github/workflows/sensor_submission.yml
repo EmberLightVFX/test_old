@@ -84,12 +84,19 @@ jobs:
             echo "{}" > sensors.json
           fi
 
+          # Debug: Print the contents of sensors.json before updating
+          echo "Contents of sensors.json before update:"
+          cat sensors.json
+
           # Update sensors.json with jq
-          jq -n --arg vendor "$VENDOR" --arg camera "$CAMERA" --argjson resolutions "$RESOLUTION_JSON" '
-          (input | . // {}) as $json |
-          ($json[$vendor] //= {}) |
-          ($json[$vendor][$camera] //= {}) |
-          reduce ($resolutions[] | .type) as $type (.; .[$vendor][$camera][$type] = $resolutions[] | select(.type == $type))' sensors.json > sensors_tmp.json
+          jq --arg vendor "$VENDOR" --arg camera "$CAMERA" --argjson resolutions "$RESOLUTION_JSON" '
+          .[$vendor] = (.[$vendor] // {})
+          | .[$vendor][$camera] = (.[$vendor][$camera] // {})
+          | reduce ($resolutions[] | .type) as $type (.; .[$vendor][$camera][$type] = $resolutions[] | select(.type == $type))' sensors.json > sensors_tmp.json
+
+          # Debug: Print the contents of sensors_tmp.json after jq operation
+          echo "Contents of sensors_tmp.json after jq update:"
+          cat sensors_tmp.json
 
           mv sensors_tmp.json sensors.json
 

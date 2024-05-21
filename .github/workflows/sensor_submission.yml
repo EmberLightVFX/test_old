@@ -62,24 +62,24 @@ jobs:
 
           # Convert the resolution types to JSON format
           RESOLUTION_JSON=$(echo "$RESOLUTION_TYPE" | python3 -c "
-            import sys, json
-            data = sys.stdin.read()
-            resolutions = []
-            for block in data.strip().split('\\n\\n'):
-                resolution = {}
-                for line in block.strip().split('\\n'):
-                    if ':' in line:
-                        key, value = [x.strip() for x in line.split(':', 1)]
-                        if key.lower() in ['resolution', 'mm', 'inch']:
-                            width, height = [float(x) for x in value.split('x')]
-                            resolution[key.lower()] = {'width': width, 'height': height}
-                        elif key.lower() == 'type':
-                            resolution['type'] = value
-                        else:
-                            resolution[key.lower().replace(' ', '_')] = value
-                resolutions.append(resolution)
-            print(json.dumps(resolutions, indent=2))
-          ")
+import sys, json
+data = sys.stdin.read()
+resolutions = []
+for block in data.strip().split('\\n\\n'):
+    resolution = {}
+    for line in block.strip().split('\\n'):
+        if ':' in line:
+            key, value = [x.strip() for x in line.split(':', 1)]
+            if key.lower() in ['resolution', 'mm', 'inch']:
+                width, height = [float(x) for x in value.split('x')]
+                resolution[key.lower()] = {'width': width, 'height': height}
+            elif key.lower() == 'type':
+                resolution['type'] = value
+            else:
+                resolution[key.lower().replace(' ', '_')] = value
+    resolutions.append(resolution)
+print(json.dumps(resolutions, indent=2))
+")
 
           # Ensure sensors.json exists and is initialized
           touch sensors.json

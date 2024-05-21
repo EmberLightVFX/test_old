@@ -23,6 +23,7 @@ jobs:
           echo "Custom Vendor: $CUSTOM_VENDOR"
           echo "Camera: $CAMERA"
           echo "Resolution Type: $RESOLUTION"
+        shell: bash
 
       - name: Extract issue details
         id: extract_details

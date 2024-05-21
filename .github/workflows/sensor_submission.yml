@@ -15,20 +15,18 @@ jobs:
       - name: Extract issue details
         id: info
         run: |
-          echo "vendor<<EOF" >> $GITHUB_ENV
-          echo "$(echo "${{ github.event.issue.body }}" | awk '/### Vendor/{flag=1;next}/^###/{flag=0}flag' | tail -n +2)" >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
-          
-          echo "custom_vendor<<EOF" >> $GITHUB_ENV
-          echo "$(echo "${{ github.event.issue.body }}" | awk '/### Custom Vendor/{flag=1;next}/^###/{flag=0}flag' | tail -n +2)" >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
-          
-          echo "camera<<EOF" >> $GITHUB_ENV
-          echo "$(echo "${{ github.event.issue.body }}" | awk '/### Camera/{flag=1;next}/^###/{flag=0}flag' | tail -n +2)" >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
-          
+          VENDOR=$(echo "${{ github.event.issue.body }}" | awk '/### Vendor/{flag=1;next}/^###/{flag=0}flag' | tail -n +2)
+          echo "vendor=$VENDOR" >> $GITHUB_ENV
+
+          CUSTOM_VENDOR=$(echo "${{ github.event.issue.body }}" | awk '/### Custom Vendor/{flag=1;next}/^###/{flag=0}flag' | tail -n +2)
+          echo "custom_vendor=$CUSTOM_VENDOR" >> $GITHUB_ENV
+
+          CAMERA=$(echo "${{ github.event.issue.body }}" | awk '/### Camera/{flag=1;next}/^###/{flag=0}flag' | tail -n +2)
+          echo "camera=$CAMERA" >> $GITHUB_ENV
+
+          RESOLUTION_TYPE=$(echo "${{ github.event.issue.body }}" | awk '/### Resolution Type/{flag=1;next}/^###/{flag=0}flag' | tail -n +2)
           echo "resolution_type<<EOF" >> $GITHUB_ENV
-          echo "$(echo "${{ github.event.issue.body }}" | awk '/### Resolution Type/{flag=1;next}/^###/{flag=0}flag' | tail -n +2)" >> $GITHUB_ENV
+          echo "$RESOLUTION_TYPE" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
 
       - name: Debug extracted data
@@ -82,11 +80,13 @@ jobs:
           ")
 
           # Ensure sensors.json exists and is initialized
-          touch sensors.json
+          if [ ! -f sensors.json ]; then
+            echo "{}" > sensors.json
+          fi
 
           # Update sensors.json with jq
           jq -n --arg vendor "$VENDOR" --arg camera "$CAMERA" --argjson resolutions "$RESOLUTION_JSON" '
-          (input // {}) as $json |
+          (input | . // {}) as $json |
           ($json[$vendor] //= {}) |
           ($json[$vendor][$camera] //= {}) |
           reduce ($resolutions[] | .type) as $type (.; .[$vendor][$camera][$type] = $resolutions[] | select(.type == $type))' sensors.json > sensors_tmp.json

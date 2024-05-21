@@ -90,8 +90,8 @@ jobs:
 
           # Update sensors.json with jq
           jq --arg vendor "$VENDOR" --arg camera "$CAMERA" --argjson resolutions "$RESOLUTION_JSON" '
-          .[$vendor] = (.[$vendor] // {})
-          | .[$vendor][$camera] = (.[$vendor][$camera] // {})
+          .[$vendor] |= if . == null then {} else . end
+          | .[$vendor][$camera] |= if . == null then {} else . end
           | reduce ($resolutions[] | .type) as $type (.; .[$vendor][$camera][$type] = $resolutions[] | select(.type == $type))' sensors.json > sensors_tmp.json
 
           # Debug: Print the contents of sensors_tmp.json after jq operation

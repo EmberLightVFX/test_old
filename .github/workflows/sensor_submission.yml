@@ -12,6 +12,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Set ImageMagick environment variables
+        run: |
+          export MAGICK_HOME="/path/to/ImageMagick"
+          export MAGICK_CODER_MODULE_PATH="$MAGICK_HOME/modules-Q16/coders"
+          export MAGICK_CONFIGURE_PATH="$MAGICK_HOME/etc/ImageMagick-6"
+          export MAGICK_TMPDIR="/tmp"
+
       - name: Extract issue details
         id: info
         run: |
@@ -86,35 +93,3 @@ jobs:
             SENSORS="{}"
           fi
 
-          # Convert existing sensors.json content to a Python dictionary
-          import json
-          sensors_data = json.loads(SENSORS)
-
-          # Ensure the necessary keys exist in the dictionary
-          if VENDOR not in sensors_data:
-              sensors_data[VENDOR] = {}
-          if CAMERA not in sensors_data[VENDOR]:
-              sensors_data[VENDOR][CAMERA] = {}
-
-          # Update the dictionary with the new resolution data
-          for resolution in json.loads(RESOLUTION_JSON):
-              type_name = resolution['type']
-              sensors_data[VENDOR][CAMERA][type_name] = resolution
-
-          # Write the updated dictionary back to sensors.json
-          with open('sensors.json', 'w') as f:
-              json.dump(sensors_data, f, indent=2)
-
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v5
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: New sensor data for ${{ env.camera }} - ${{ env.vendor }}
-          committer: GitHub <noreply@github.com>
-          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-          title: 'New sensor: ${{ env.vendor }} - ${{ env.camera }}'
-          body: |
-            This pull request adds new sensor data for the camera ${{ env.camera }} by ${{ env.vendor }}.
-
-            ${{ github.event.issue.body }}
-          labels: submission

@@ -1,2 +1,3 @@
-# camera-sensor-database
+# Camera Sensor Database
+
 A collection of camera sensor information

@@ -14,10 +14,10 @@ jobs:
 
       - name: Debug pre-extraction data
         run: |
-          VENDOR=$(echo "${{ github.event.issue.body }}" | awk '/### Vendor/{getline; print}')
-          CUSTOM_VENDOR=$(echo "${{ github.event.issue.body }}" | awk '/### Custom Vendor/{getline; print}')
-          CAMERA=$(echo "${{ github.event.issue.body }}" | awk '/### Camera/{getline; print}')
-          RESOLUTION=$(echo "${{ github.event.issue.body }}" | awk '/### Resolution Type/{flag=1;next}/^###/{flag=0}flag' | tail -n +2)
+          VENDOR=$(echo "${{ github.event.issue.body }}" | awk '/### Vendor/{flag=1;next}/^###/{flag=0}flag')
+          CUSTOM_VENDOR=$(echo "${{ github.event.issue.body }}" | awk '/### Custom Vendor/{flag=1;next}/^###/{flag=0}flag')
+          CAMERA=$(echo "${{ github.event.issue.body }}" | awk '/### Camera/{flag=1;next}/^###/{flag=0}flag')
+          RESOLUTION=$(echo "${{ github.event.issue.body }}" | awk '/### Resolution Type/{flag=1;next}/^###/{flag=0}flag')
           echo "Event Body: ${{ github.event.issue.body }}"
           echo "Vendor: $VENDOR"
           echo "Custom Vendor: $CUSTOM_VENDOR"
@@ -28,10 +28,10 @@ jobs:
       - name: Extract issue details
         id: extract_details
         run: |
-          echo "vendor=$(echo "${{ github.event.issue.body }}" | awk '/### Vendor/{getline; print}')" >> $GITHUB_ENV
-          echo "custom_vendor=$(echo "${{ github.event.issue.body }}" | awk '/### Custom Vendor/{getline; print}')" >> $GITHUB_ENV
-          echo "camera=$(echo "${{ github.event.issue.body }}" | awk '/### Camera/{getline; print}')" >> $GITHUB_ENV
-          echo "resolution_type=$(echo "${{ github.event.issue.body }}" | awk '/### Resolution Type/{flag=1;next}/^###/{flag=0}flag' | tail -n +2)" >> $GITHUB_ENV
+          echo "vendor=$(echo "${{ github.event.issue.body }}" | awk '/### Vendor/{flag=1;next}/^###/{flag=0}flag')" >> $GITHUB_ENV
+          echo "custom_vendor=$(echo "${{ github.event.issue.body }}" | awk '/### Custom Vendor/{flag=1;next}/^###/{flag=0}flag')" >> $GITHUB_ENV
+          echo "camera=$(echo "${{ github.event.issue.body }}" | awk '/### Camera/{flag=1;next}/^###/{flag=0}flag')" >> $GITHUB_ENV
+          echo "resolution_type=$(echo "${{ github.event.issue.body }}" | awk '/### Resolution Type/{flag=1;next}/^###/{flag=0}flag')" >> $GITHUB_ENV
 
       - name: Debug extracted data
         run: |

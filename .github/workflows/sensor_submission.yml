@@ -8,38 +8,36 @@ jobs:
   process_submission:
     runs-on: ubuntu-latest
 
+    outputs:
+      vendor: ${{ steps.extract_details.outputs.vendor }}
+      custom_vendor: ${{ steps.extract_details.outputs.custom_vendor }}
+      camera: ${{ steps.extract_details.outputs.camera }}
+      resolution_type: ${{ steps.extract_details.outputs.resolution_type }}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Debug pre-extraction data
-        run: |
-          VENDOR=$(echo "${{ github.event.issue.body }}" | awk '/### Vendor/{flag=1;next}/^###/{flag=0}flag')
-          CUSTOM_VENDOR=$(echo "${{ github.event.issue.body }}" | awk '/### Custom Vendor/{flag=1;next}/^###/{flag=0}flag')
-          CAMERA=$(echo "${{ github.event.issue.body }}" | awk '/### Camera/{flag=1;next}/^###/{flag=0}flag')
-          RESOLUTION=$(echo "${{ github.event.issue.body }}" | awk '/### Resolution Type/{flag=1;next}/^###/{flag=0}flag')
-          echo "Event Body: ${{ github.event.issue.body }}"
-          echo "Vendor: $VENDOR"
-          echo "Custom Vendor: $CUSTOM_VENDOR"
-          echo "Camera: $CAMERA"
-          echo "Resolution Type: $RESOLUTION"
-        shell: bash
-
       - name: Extract issue details
         id: extract_details
         run: |
-          echo "vendor=$(echo "${{ github.event.issue.body }}" | awk '/### Vendor/{flag=1;next}/^###/{flag=0}flag')" >> $GITHUB_ENV
-          echo "custom_vendor=$(echo "${{ github.event.issue.body }}" | awk '/### Custom Vendor/{flag=1;next}/^###/{flag=0}flag')" >> $GITHUB_ENV
-          echo "camera=$(echo "${{ github.event.issue.body }}" | awk '/### Camera/{flag=1;next}/^###/{flag=0}flag')" >> $GITHUB_ENV
-          echo "resolution_type=$(echo "${{ github.event.issue.body }}" | awk '/### Resolution Type/{flag=1;next}/^###/{flag=0}flag')" >> $GITHUB_ENV
+          echo "::set-output name=vendor::$(echo "${{ github.event.issue.body }}" | awk '/### Vendor/{flag=1;next}/^###/{flag=0}flag' | tail -n +2)"
+          echo "::set-output name=custom_vendor::$(echo "${{ github.event.issue.body }}" | awk '/### Custom Vendor/{flag=1;next}/^###/{flag=0}flag' | tail -n +2)"
+          echo "::set-output name=camera::$(echo "${{ github.event.issue.body }}" | awk '/### Camera/{flag=1;next}/^###/{flag=0}flag' | tail -n +2)"
+          echo "::set-output name=resolution_type::$(echo "${{ github.event.issue.body }}" | awk '/### Resolution Type/{flag=1;next}/^###/{flag=0}flag' | tail -n +2)"
 
+  process_data:
+    needs: process_submission
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Debug extracted data
         run: |
           echo "Event Body: ${{ github.event.issue.body }}"
-          echo "Vendor: ${{ env.vendor }}"
-          echo "Custom Vendor: ${{ env.custom_vendor }}"
-          echo "Camera: ${{ env.camera }}"
-          echo "Resolution Type: ${{ env.resolution_type }}"
+          echo "Vendor: ${{ needs.process_submission.outputs.vendor }}"
+          echo "Custom Vendor: ${{ needs.process_submission.outputs.custom_vendor }}"
+          echo "Camera: ${{ needs.process_submission.outputs.camera }}"
+          echo "Resolution Type: ${{ needs.process_submission.outputs.resolution_type }}"
 
       - name: Set up Python
         uses: actions/setup-python@v2
@@ -48,10 +46,10 @@ jobs:
 
       - name: Process and update JSON
         run: |
-          VENDOR="${{ env.vendor }}"
-          CUSTOM_VENDOR="${{ env.custom_vendor }}"
-          CAMERA="${{ env.camera }}"
-          RESOLUTION_TYPE="${{ env.resolution_type }}"
+          VENDOR="${{ needs.process_submission.outputs.vendor }}"
+          CUSTOM_VENDOR="${{ needs.process_submission.outputs.custom_vendor }}"
+          CAMERA="${{ needs.process_submission.outputs.camera }}"
+          RESOLUTION_TYPE="${{ needs.process_submission.outputs.resolution_type }}"
 
           if [ "$VENDOR" == "Custom" ]; then
             VENDOR="$CUSTOM_VENDOR"
@@ -99,12 +97,12 @@ jobs:
         uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: New sensor data for ${{ env.camera }} - ${{ env.vendor }}
+          commit-message: New sensor data for ${{ needs.process_submission.outputs.camera }} - ${{ needs.process_submission.outputs.vendor }}
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-          title: 'New sensor: ${{ env.vendor }} - ${{ env.camera }}'
+          title: 'New sensor: ${{ needs.process_submission.outputs.vendor }} - ${{ needs.process_submission.outputs.camera }}'
           body: |
-            This pull request adds new sensor data for the camera ${{ env.camera }} by ${{ env.vendor }}.
+            This pull request adds new sensor data for the camera ${{ needs.process_submission.outputs.camera }} by ${{ needs.process_submission.outputs.vendor }}.
 
             ${{ github.event.issue.body }}
           labels: submission

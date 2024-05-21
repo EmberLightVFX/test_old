@@ -93,3 +93,6 @@ jobs:
             SENSORS="{}"
           fi
 
+          # Convert existing sensors.json content to a Python dictionary
+          import json
+          sensors_data = json.loads(SENSORS)

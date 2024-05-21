@@ -42,7 +42,7 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Process and update JSON
+      - name: Process and update JSON with Python
         run: |
           VENDOR="${{ env.vendor }}"
           CUSTOM_VENDOR="${{ env.custom_vendor }}"
@@ -58,7 +58,7 @@ jobs:
             exit 1
           fi
 
-          # Convert the resolution types to JSON format
+          # Convert the resolution types to JSON format using Python
           RESOLUTION_JSON=$(echo "$RESOLUTION_TYPE" | python3 -c "
           import sys, json
           data = sys.stdin.read()
@@ -79,27 +79,31 @@ jobs:
           print(json.dumps(resolutions, indent=2))
           ")
 
-          # Ensure sensors.json exists and is initialized
-          if [ ! -f sensors.json ]; then
-            echo "{}" > sensors.json
+          # Read existing sensors.json file
+          if [ -f sensors.json ]; then
+            SENSORS=$(cat sensors.json)
+          else
+            SENSORS="{}"
           fi
 
-          # Debug: Print the contents of sensors.json before updating
-          echo "Contents of sensors.json before update:"
-          cat sensors.json
+          # Convert existing sensors.json content to a Python dictionary
+          import json
+          sensors_data = json.loads(SENSORS)
 
-          # Update sensors.json with jq
-          jq --arg vendor "$VENDOR" --arg camera "$CAMERA" --argjson resolutions "$RESOLUTION_JSON" '
-          .[$vendor] |= . // {}
-          | .[$vendor][$camera] |= . // {}
-          | reduce ($resolutions[] | .type) as $type (.;
-              .[$vendor][$camera][$type] = $resolutions[] | select(.type == $type))' sensors.json > sensors_tmp.json
+          # Ensure the necessary keys exist in the dictionary
+          if VENDOR not in sensors_data:
+              sensors_data[VENDOR] = {}
+          if CAMERA not in sensors_data[VENDOR]:
+              sensors_data[VENDOR][CAMERA] = {}
 
-          # Debug: Print the contents of sensors_tmp.json after jq operation
-          echo "Contents of sensors_tmp.json after jq update:"
-          cat sensors_tmp.json
+          # Update the dictionary with the new resolution data
+          for resolution in json.loads(RESOLUTION_JSON):
+              type_name = resolution['type']
+              sensors_data[VENDOR][CAMERA][type_name] = resolution
 
-          mv sensors_tmp.json sensors.json
+          # Write the updated dictionary back to sensors.json
+          with open('sensors.json', 'w') as f:
+              json.dump(sensors_data, f, indent=2)
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5

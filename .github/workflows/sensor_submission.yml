@@ -59,7 +59,7 @@ jobs:
           fi
 
           # Call the Python script to update sensors.json
-          python3 scripts/update_sensors.py "$VENDOR" "$CAMERA" <<< "$RESOLUTION_JSON"
+          python3 scripts/update_sensors.py "$VENDOR" "$CAMERA" "$RESOLUTION_TYPE"
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5

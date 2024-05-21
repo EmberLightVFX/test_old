@@ -15,10 +15,10 @@ jobs:
       - name: Extract issue details
         id: info
         run: |
-          echo vendor="$(echo "${{ github.event.issue.body }}" | awk '/### Vendor/{flag=1;next}/^###/{flag=0}flag' | tail -n +2)" >> $GITHUB_OUTPUT
-          echo custom_vendor="$(echo "${{ github.event.issue.body }}" | awk '/### Custom Vendor/{flag=1;next}/^###/{flag=0}flag' | tail -n +2)" >> $GITHUB_OUTPUT
-          echo camera="$(echo "${{ github.event.issue.body }}" | awk '/### Camera/{flag=1;next}/^###/{flag=0}flag' | tail -n +2)" >> $GITHUB_OUTPUT
-          echo resolution_type="$(echo "${{ github.event.issue.body }}" | awk '/### Resolution Type/{flag=1;next}/^###/{flag=0}flag' | tail -n +2)" >> $GITHUB_OUTPUT
+          echo "vendor=$(echo "${{ github.event.issue.body }}" | awk '/### Vendor/{flag=1;next}/^###/{flag=0}flag' | tail -n +2)" >> $GITHUB_OUTPUT
+          echo "custom_vendor=$(echo "${{ github.event.issue.body }}" | awk '/### Custom Vendor/{flag=1;next}/^###/{flag=0}flag' | tail -n +2)" >> $GITHUB_OUTPUT
+          echo "camera=$(echo "${{ github.event.issue.body }}" | awk '/### Camera/{flag=1;next}/^###/{flag=0}flag' | tail -n +2)" >> $GITHUB_OUTPUT
+          echo "resolution_type=$(echo "${{ github.event.issue.body }}" | awk '/### Resolution Type/{flag=1;next}/^###/{flag=0}flag' | tail -n +2)" >> $GITHUB_OUTPUT
 
       - name: Debug extracted data
         run: |

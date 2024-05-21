@@ -1,4 +1,4 @@
-name: Sensor Submission
+name: Sensor Submission2
 
 on:
   issues:
@@ -15,14 +15,14 @@ jobs:
       - name: Extract issue details
         id: extract_details
         run: |
-          echo "vendor=$(echo "${{ github.event.issue.body }}" | grep -oP '(?<=### Vendor\n).*')" >> $GITHUB_ENV
-          echo "custom_vendor=$(echo "${{ github.event.issue.body }}" | grep -oP '(?<=### Custom Vendor\n).*')" >> $GITHUB_ENV
-          echo "camera=$(echo "${{ github.event.issue.body }}" | grep -oP '(?<=### Camera\n).*')" >> $GITHUB_ENV
-          echo "resolution_type=$(echo "${{ github.event.issue.body }}" | awk '/### Resolution Type/{flag=1;next}/^###/{flag=0}flag')" >> $GITHUB_ENV
+          echo "vendor=$(echo "${{ github.event.issue.body }}" | grep -oP '(?<=### Vendor\n).*' | tail -n 1)" >> $GITHUB_ENV
+          echo "custom_vendor=$(echo "${{ github.event.issue.body }}" | grep -oP '(?<=### Custom Vendor\n).*' | tail -n 1)" >> $GITHUB_ENV
+          echo "camera=$(echo "${{ github.event.issue.body }}" | grep -oP '(?<=### Camera\n).*' | tail -n 1)" >> $GITHUB_ENV
+          echo "resolution_type=$(echo "${{ github.event.issue.body }}" | awk '/### Resolution Type/{flag=1;next}/^###/{flag=0}flag' | tail -n +2)" >> $GITHUB_ENV
 
       - name: Debug extracted data
         run: |
-          echo "Event body: ${{ github.event.issue.body }}"
+          echo "Event Body: ${{ github.event.issue.body }}"
           echo "Vendor: ${{ env.vendor }}"
           echo "Custom Vendor: ${{ env.custom_vendor }}"
           echo "Camera: ${{ env.camera }}"
@@ -32,59 +32,61 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: '3.x'
-
-      - name: Validate and process submission
+    
+      - name: Process and update JSON
         run: |
-          VENDOR="$VENDOR"
-          CUSTOM_VENDOR="$CUSTOM_VENDOR"
-          CAMERA="$CAMERA"
-          RESOLUTION_TYPE="$RESOLUTION_TYPE"
-          
+          VENDOR="${{ env.vendor }}"
+          CUSTOM_VENDOR="${{ env.custom_vendor }}"
+          CAMERA="${{ env.camera }}"
+          RESOLUTION_TYPE="${{ env.resolution_type }}"
+  
           if [ "$VENDOR" == "Custom" ]; then
             VENDOR="$CUSTOM_VENDOR"
           fi
-          
+  
           if [ -z "$VENDOR" ] || [ -z "$CAMERA" ] || [ -z "$RESOLUTION_TYPE" ]; then
             echo "Missing required fields."
             exit 1
           fi
-          
+  
           # Convert the resolution types to JSON format
           RESOLUTION_JSON=$(echo "$RESOLUTION_TYPE" | python3 -c "
-          import sys, json
-          data = sys.stdin.read()
-          resolutions = []
-          for block in data.strip().split('\\n\\n'):
-              resolution = {}
-              for line in block.strip().split('\\n'):
-                  if ':' in line:
-                      key, value = [x.strip() for x in line.split(':', 1)]
-                      if key.lower() in ['resolution', 'mm', 'inch']:
-                          width, height = [float(x) for x in value.split('x')]
-                          resolution[key.lower()] = {'width': width, 'height': height}
-                      elif key.lower() == 'type':
-                          resolution['type'] = value
-                      else:
-                          resolution[key.lower().replace(' ', '_')] = value
-              resolutions.append(resolution)
-          print(json.dumps(resolutions, indent=2))
+            import sys, json
+            data = sys.stdin.read()
+            resolutions = []
+            for block in data.strip().split('\\n\\n'):
+                resolution = {}
+                for line in block.strip().split('\\n'):
+                    if ':' in line:
+                        key, value = [x.strip() for x in line.split(':', 1)]
+                        if key.lower() in ['resolution', 'mm', 'inch']:
+                            width, height = [float(x) for x in value.split('x')]
+                            resolution[key.lower()] = {'width': width, 'height': height}
+                        elif key.lower() == 'type':
+                            resolution['type'] = value
+                        else:
+                            resolution[key.lower().replace(' ', '_')] = value
+                resolutions.append(resolution)
+            print(json.dumps(resolutions, indent=2))
           ")
+            
+          # Ensure sensors.json exists and is initialized
+          touch sensors.json
 
-          # Update sensors.json using jq
+          # Update sensors.json with jq
           jq -n --arg vendor "$VENDOR" --arg camera "$CAMERA" --argjson resolutions "$RESOLUTION_JSON" '
-            (input // {}) as $json |
-            ($json[$vendor] //= {}) |
-            ($json[$vendor][$camera] //= {}) |
-            reduce ($resolutions[] | .type) as $type (.; .[$vendor][$camera][$type] = $resolutions[] | select(.type == $type))
-          ' sensors.json > sensors_tmp.json
-          
+          (input // {}) as $json |
+          ($json[$vendor] //= {}) |
+          ($json[$vendor][$camera] //= {}) |
+          reduce ($resolutions[] | .type) as $type (.; .[$vendor][$camera][$type] = $resolutions[] | select(.type == $type))' sensors.json > sensors_tmp.json
+
           mv sensors_tmp.json sensors.json
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: New sensor data for ${{ env.camera }} - ${{ env.camera }}
+          commit-message: New sensor data for ${{ env.camera }} - ${{ env.vendor }}
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           title: 'New sensor: ${{ env.vendor }} - ${{ env.camera }}'

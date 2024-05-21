@@ -34,10 +34,10 @@ jobs:
       - name: Debug extracted data
         run: |
           echo "Event Body: ${{ github.event.issue.body }}"
-          echo "Vendor: ${{ steps.info.outputs.vendor }}"
-          echo "Custom Vendor: ${{ steps.info.outputs.custom_vendor }}"
-          echo "Camera: ${{ steps.info.outputs.camera }}"
-          echo "Resolution Type: ${{ steps.info.outputs.resolution_type }}"
+          echo "Vendor: ${{ env.vendor }}"
+          echo "Custom Vendor: ${{ env.custom_vendor }}"
+          echo "Camera: ${{ env.camera }}"
+          echo "Resolution Type: ${{ env.resolution_type }}"
 
       - name: Set up Python
         uses: actions/setup-python@v2
@@ -46,10 +46,10 @@ jobs:
 
       - name: Process and update JSON
         run: |
-          VENDOR="${{ steps.info.outputs.vendor }}"
-          CUSTOM_VENDOR="${{ steps.info.outputs.custom_vendor }}"
-          CAMERA="${{ steps.info.outputs.camera }}"
-          RESOLUTION_TYPE="${{ steps.info.outputs.resolution_type }}"
+          VENDOR="${{ env.vendor }}"
+          CUSTOM_VENDOR="${{ env.custom_vendor }}"
+          CAMERA="${{ env.camera }}"
+          RESOLUTION_TYPE="${{ env.resolution_type }}"
 
           if [ "$VENDOR" == "Custom" ]; then
             VENDOR="$CUSTOM_VENDOR"
@@ -97,12 +97,12 @@ jobs:
         uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: New sensor data for ${{ steps.info.outputs.camera }} - ${{ steps.info.outputs.vendor }}
+          commit-message: New sensor data for ${{ env.camera }} - ${{ env.vendor }}
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-          title: 'New sensor: ${{ steps.info.outputs.vendor }} - ${{ steps.info.outputs.camera }}'
+          title: 'New sensor: ${{ env.vendor }} - ${{ env.camera }}'
           body: |
-            This pull request adds new sensor data for the camera ${{ steps.info.outputs.camera }} by ${{ steps.info.outputs.vendor }}.
+            This pull request adds new sensor data for the camera ${{ env.camera }} by ${{ env.vendor }}.
 
             ${{ github.event.issue.body }}
           labels: submission

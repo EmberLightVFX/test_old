@@ -12,13 +12,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set ImageMagick environment variables
-        run: |
-          export MAGICK_HOME="/path/to/ImageMagick"
-          export MAGICK_CODER_MODULE_PATH="$MAGICK_HOME/modules-Q16/coders"
-          export MAGICK_CONFIGURE_PATH="$MAGICK_HOME/etc/ImageMagick-6"
-          export MAGICK_TMPDIR="/tmp"
-
       - name: Extract issue details
         id: info
         run: |
@@ -65,40 +58,19 @@ jobs:
             exit 1
           fi
 
-          # Convert the resolution types to JSON format using Python
-          RESOLUTION_JSON=$(echo "$RESOLUTION_TYPE" | python3 -c "
-          import sys, json
-          data = sys.stdin.read()
-          resolutions = []
-          for block in data.strip().split('\\n\\n'):
-              resolution = {}
-              for line in block.strip().split('\\n'):
-                  if ':' in line:
-                      key, value = [x.strip() for x in line.split(':', 1)]
-                      if key.lower() in ['resolution', 'mm', 'inch']:
-                          width, height = [float(x) for x in value.split('x')]
-                          resolution[key.lower()] = {'width': width, 'height': height}
-                      elif key.lower() == 'type':
-                          resolution['type'] = value
-                      else:
-                          resolution[key.lower().replace(' ', '_')] = value
-              resolutions.append(resolution)
-          print(json.dumps(resolutions, indent=2))
-          ")
+          # Call the Python script to update sensors.json
+          python3 scripts/update_sensors.py "$VENDOR" "$CAMERA" <<< "$RESOLUTION_JSON"
 
-          # Read existing sensors.json file
-          if [ -f sensors.json ]; then
-            SENSORS=$(cat sensors.json)
-          else
-            SENSORS="{}"
-          fi
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: New sensor data for ${{ env.camera }} - ${{ env.vendor }}
+          committer: GitHub <noreply@github.com>
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          title: 'New sensor: ${{ env.vendor }} - ${{ env.camera }}'
+          body: |
+            This pull request adds new sensor data for the camera ${{ env.camera }} by ${{ env.vendor }}.
 
-          # Convert existing sensors.json content to a Python dictionary
-          import json
-          sensors_data = json.loads(SENSORS)
-
-          # Ensure the necessary keys exist in the dictionary
-          if VENDOR not in sensors_data:
-              sensors_data[VENDOR] = {}
-          if CAMERA not in sensors_data[VENDOR]:
-              sensors_data[VENDOR][CAMERA] = {}
+            ${{ github.event.issue.body }}
+          labels: submission

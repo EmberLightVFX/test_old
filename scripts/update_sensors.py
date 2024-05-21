@@ -34,6 +34,8 @@ for block in TYPE.strip().split('\\n\\n'):
                 resolution[key.lower().replace(' ', '_')] = value
     resolutions.append(resolution)
 
+print(resolutions)
+
 # Update the dictionary with the new resolution data
 for resolution in resolutions:
     type_name = resolution['type']

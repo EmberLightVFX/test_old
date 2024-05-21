@@ -96,3 +96,9 @@ jobs:
           # Convert existing sensors.json content to a Python dictionary
           import json
           sensors_data = json.loads(SENSORS)
+
+          # Ensure the necessary keys exist in the dictionary
+          if VENDOR not in sensors_data:
+              sensors_data[VENDOR] = {}
+          if CAMERA not in sensors_data[VENDOR]:
+              sensors_data[VENDOR][CAMERA] = {}

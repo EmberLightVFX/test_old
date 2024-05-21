@@ -1,6 +1,6 @@
 name: Sensor Submission
 description: Fill out this form to create a new sensor and pull request.
-title: "[New Sensor]: <your title>"
+title: "[New Sensor]: Canon C300 Mark II"
 labels: [submission]
 
 body:
@@ -15,8 +15,8 @@ body:
       label: Vendor
       description: Select the camera manufacturer.
       options:
-        - Arri
         - Canon
+        - Arri
         - Sony
         - Red
         - Custom
@@ -37,7 +37,7 @@ body:
     attributes:
       label: Camera
       description: What's the camera name?
-      placeholder: ex. Alexa Mini
+      value: C300 Mark II
     validations:
       required: true
 
@@ -51,15 +51,10 @@ body:
         If you can't find both mm and inch size for the sensor, enter one and the other will automatically be calculated.
         Focal length is optional and only used for cameras with fixed lenses, eg iPhone.
       value: |
-        - Type: 4K UHD
+        - Type: All
           Focal Length (optional): 
-          Resolution: 3840 x 2160
-          mm: 26.40 x 14.85
-          inch: 1.039 x 0.585
-        - Type: 2K Anamorphic 2.39:1
-          Focal Length (optional): 
-          Resolution: 2560 x 2145
-          mm: 21.12 x 17.70
-          inch: 0.831 x 0.697
+          Resolution: 4096 x 2160
+          mm: 24.6 x 13.8
+        inch: 0.968 x 0.543
     validations:
       required: true

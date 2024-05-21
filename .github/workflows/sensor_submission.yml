@@ -12,6 +12,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Debug pre-extraction data
+        run: |
+          GITHUB_EVENT_ISSUE_BODY=${{ github.event.issue.body }}
+          VENDOR=$GITHUB_EVENT_ISSUE_BODY | grep -oP '(?<=### Vendor\n).*' | tail -n 1
+          CUSTOM_VENDOR=$GITHUB_EVENT_ISSUE_BODY | grep -oP '(?<=### Custom Vendor\n).*' | tail -n 1
+          CAMERA=$GITHUB_EVENT_ISSUE_BODY | grep -oP '(?<=### Camera\n).*' | tail -n 1
+          RESOLUTION=$GITHUB_EVENT_ISSUE_BODY | awk '/### Resolution Type/{flag=1;next}/^###/{flag=0}flag' | tail -n +2)"
+          echo "Event Body: $GITHUB_EVENT_ISSUE_BODY"
+          echo "Vendor: $VENDOR"
+          echo "Custom Vendor: $CUSTOM_VENDOR"
+          echo "Camera: $CAMERA"
+          echo "Resolution Type: $RESOLUTION"
+
+
       - name: Extract issue details
         id: extract_details
         run: |

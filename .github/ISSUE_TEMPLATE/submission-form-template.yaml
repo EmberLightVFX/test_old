@@ -51,8 +51,7 @@ body:
         If you can't find both mm and inch size for the sensor, enter one and the other will automatically be calculated.
         Focal length is optional and only used for cameras with fixed lenses, eg iPhone.
       value: |
-        -
-          Type: All
+        - Type: All
           Focal Length (optional): 
           Resolution: 4096 x 2160
           mm: 24.6 x 13.8

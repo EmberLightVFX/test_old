@@ -6,6 +6,11 @@ VENDOR = sys.argv[1]
 CAMERA = sys.argv[2]
 TYPE = sys.argv[3]
 
+print("VENDOR:", VENDOR)
+print("CAMERA:", CAMERA)
+print("TYPE:", TYPE)
+
+
 # Read existing sensors.json file if it exists
 try:
     with open('sensors.json', 'r') as f:

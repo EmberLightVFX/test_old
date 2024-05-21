@@ -55,6 +55,6 @@ body:
           Focal Length (optional): 
           Resolution: 4096 x 2160
           mm: 24.6 x 13.8
-        inch: 0.968 x 0.543
+          inch: 0.968 x 0.543
     validations:
       required: true

@@ -1,0 +1,65 @@
+name: Sensor Submission
+description: Fill out this form to create a new sensor and pull request.
+title: "[New Sensor]: <your title>"
+labels: [submission]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to make the database better!
+
+  - type: dropdown
+    id: vendor
+    attributes:
+      label: Vendor
+      description: Select the camera manufacturer.
+      options:
+        - Arri
+        - Canon
+        - Sony
+        - Red
+        - Custom
+    validations:
+      required: true
+
+  - type: input
+    id: custom_vendor
+    attributes:
+      label: Custom Vendor
+      description: If you selected "Custom" above, please specify the vendor here.
+      placeholder: Enter the custom vendor name
+    validations:
+      required: false
+
+  - type: input
+    id: camera
+    attributes:
+      label: Camera
+      description: What's the camera name?
+      placeholder: ex. Alexa Mini
+    validations:
+      required: true
+
+  - type: textarea
+    id: resolution-type
+    attributes:
+      label: Resolution Type
+      description: |
+        List of resolution types and their information.
+        Modify the template below to fit the new sensor information.
+        If you can't find both mm and inch size for the sensor, enter one and the other will automatically be calculated.
+        Focal length is optional and only used for cameras with fixed lenses, eg iPhone.
+      value: |
+        - Type: 4K UHD
+          Focal Length (optional): 
+          Resolution: 3840 x 2160
+          mm: 26.40 x 14.85
+          inch: 1.039 x 0.585
+        - Type: 2K Anamorphic 2.39:1
+          Focal Length (optional): 
+          Resolution: 2560 x 2145
+          mm: 21.12 x 17.70
+          inch: 0.831 x 0.697
+    validations:
+      required: true

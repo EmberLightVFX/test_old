@@ -1,0 +1,84 @@
+name: Sensor Submission
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  add_sensor:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Extract issue details
+      id: extract_details
+      run: |
+        echo "vendor=$(echo "${{ github.event.issue.body }}" | grep -oP '(?<=Vendor: ).*')" >> $GITHUB_ENV
+        echo "custom_vendor=$(echo "${{ github.event.issue.body }}" | grep -oP '(?<=Custom Vendor: ).*')" >> $GITHUB_ENV
+        echo "camera=$(echo "${{ github.event.issue.body }}" | grep -oP '(?<=Camera: ).*')" >> $GITHUB_ENV
+        echo "resolution_type=$(echo "${{ github.event.issue.body }}" | awk '/Resolution Type:/{flag=1;next}/---/{flag=0}flag')" >> $GITHUB_ENV
+
+    - name: Update sensors.json
+      id: update_json
+      run: |
+        VENDOR="${{ env.vendor }}"
+        CUSTOM_VENDOR="${{ env.custom_vendor }}"
+        CAMERA="${{ env.camera }}"
+        RESOLUTION_TYPE="${{ env.resolution_type }}"
+
+        if [ "$VENDOR" == "Custom" ]; then
+          VENDOR="$CUSTOM_VENDOR"
+        fi
+
+        if [ -z "$VENDOR" ] || [ -z "$CAMERA" ] || [ -z "$RESOLUTION_TYPE" ]; then
+          echo "Missing required fields."
+          exit 1
+        fi
+
+        # Convert the resolution types to JSON format
+        RESOLUTION_JSON=$(echo "$RESOLUTION_TYPE" | python3 -c "
+          import sys, json
+          data = sys.stdin.read()
+          resolutions = []
+          for block in data.strip().split('\n\n'):
+              resolution = {}
+              for line in block.strip().split('\n'):
+                  if ':' in line:
+                      key, value = [x.strip() for x in line.split(':', 1)]
+                      if key.lower() in ['resolution', 'mm', 'inch']:
+                          width, height = [float(x) for x in value.split('x')]
+                          resolution[key.lower()] = {'width': width, 'height': height}
+                      elif key.lower() == 'type':
+                          resolution['type'] = value
+                      else:
+                          resolution[key.lower().replace(' ', '_')] = value
+              resolutions.append(resolution)
+          print(json.dumps(resolutions, indent=2))
+        ")
+
+        jq -n --arg vendor "$VENDOR" --arg camera "$CAMERA" --argjson resolutions "$RESOLUTION_JSON" '
+          (input // {}) as $json |
+          ($json[$vendor] //= {}) |
+          ($json[$vendor][$camera] //= {}) |
+          reduce ($resolutions[] | .type) as $type (.; .[$vendor][$camera][$type] = $resolutions[] | select(.type == $type))' sensors.json > sensors_tmp.json
+        mv sensors_tmp.json sensors.json
+
+    - name: Commit and push changes
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git checkout -b add-sensor-${{ github.event.issue.number }}
+        git add sensors.json
+        git commit -m "Add sensor data from issue #${{ github.event.issue.number }}"
+        git push origin add-sensor-${{ github.event.issue.number }}
+
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v5
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        branch: add-sensor-${{ github.event.issue.number }}
+        title: "Add new sensor data from issue #${{ github.event.issue.number }}"
+        body: "This PR adds sensor data submitted in issue #${{ github.event.issue.number }}."
+        labels: submission

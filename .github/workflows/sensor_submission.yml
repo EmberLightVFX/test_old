@@ -14,12 +14,11 @@ jobs:
 
       - name: Debug pre-extraction data
         run: |
-          GITHUB_EVENT_ISSUE_BODY="${{ github.event.issue.body }}"
-          VENDOR=$(echo "$GITHUB_EVENT_ISSUE_BODY" | awk '/### Vendor/{getline; print}')
-          CUSTOM_VENDOR=$(echo "$GITHUB_EVENT_ISSUE_BODY" | awk '/### Custom Vendor/{getline; print}')
-          CAMERA=$(echo "$GITHUB_EVENT_ISSUE_BODY" | awk '/### Camera/{getline; print}')
-          RESOLUTION=$(echo "$GITHUB_EVENT_ISSUE_BODY" | awk '/### Resolution Type/{flag=1;next}/^###/{flag=0}flag' | tail -n +2)
-          echo "Event Body: $GITHUB_EVENT_ISSUE_BODY"
+          VENDOR=$(echo "${{ github.event.issue.body }}" | awk '/### Vendor/{getline; print}')
+          CUSTOM_VENDOR=$(echo "${{ github.event.issue.body }}" | awk '/### Custom Vendor/{getline; print}')
+          CAMERA=$(echo "${{ github.event.issue.body }}" | awk '/### Camera/{getline; print}')
+          RESOLUTION=$(echo "${{ github.event.issue.body }}" | awk '/### Resolution Type/{flag=1;next}/^###/{flag=0}flag' | tail -n +2)
+          echo "Event Body: ${{ github.event.issue.body }}"
           echo "Vendor: $VENDOR"
           echo "Custom Vendor: $CUSTOM_VENDOR"
           echo "Camera: $CAMERA"

@@ -45,7 +45,7 @@ camera_info = blocks[0].strip().split("### ")
 
 # Vendor
 category, body = cleanup_block(camera_info[2])
-if body == "Custom":
+if body == "Other":
     category, body = cleanup_block(camera_info[3])
 vendor = body
 if vendor not in sensors_data:

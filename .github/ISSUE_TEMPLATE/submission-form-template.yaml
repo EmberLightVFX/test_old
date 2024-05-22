@@ -15,10 +15,8 @@ body:
       label: References
       description: Please fill out where you have found the information.
         This is just to keep track on where it all comes from.
-      value: |
-        Here is some good information.
-        https://duckduckgo.com/?q=information&t=newext&atb=v281-1
-        More on this line!
+      placeholder: |
+        https://www.arri.com/resource/blob/277386/3d47cc0f22a5ebe30a48f68cc7bf94a1/2022-05-arri-formatsandresolutionsoverview-4-1-data.pdf
     validations:
       required: true
 
@@ -32,22 +30,22 @@ body:
       label: Vendor
       # description: Select the camera manufacturer.
       options:
-        - Arri
+        - ARRI
         - Blackmagic Design
         - Canon
         - Panasonic
         - RED
         - Sony
-        - Custom
+        - Other
     validations:
       required: true
 
   - type: input
-    id: custom_vendor
+    id: other_vendor
     attributes:
-      label: Custom Vendor
-      description: If you selected "Custom" above, please specify the vendor here.
-      placeholder: Enter the custom vendor name
+      label: Other Vendor
+      description: If you selected "Other" above, please specify the vendor here.
+      placeholder: Enter the other vendor name
 
   - type: input
     id: camera

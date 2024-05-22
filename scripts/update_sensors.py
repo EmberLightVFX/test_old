@@ -42,23 +42,19 @@ vendor = None
 camera = None
 
 blocks = BODY.strip().split("### Name", 1)
-print("BLOCKSSS", blocks)
-print("blocks[0].strip()", blocks[0].strip())
-print('blocks[0].strip().split("### ")', blocks[0].strip().split("### "))
-print('blocks[0].split("### ")', blocks[0].split("### "))
 ## Camera info
 camera_info = blocks[0].strip().split("### ")
 
 # Vendor
-category, body = cleanup_block(camera_info[1])
+category, body = cleanup_block(camera_info[2])
 if body == "Custom":
-    category, body = cleanup_block(camera_info[2])
+    category, body = cleanup_block(camera_info[3])
 vendor = body
 if vendor not in sensors_data:
     sensors_data[vendor] = {}
 
 # Camera
-category, body = cleanup_block(camera_info[3])
+category, body = cleanup_block(camera_info[4])
 camera = body
 if camera not in sensors_data[vendor]:
     sensors_data[vendor][camera] = {}
@@ -74,21 +70,21 @@ for block in blocks[1:]:
     res_type = block.strip().split("### ")
 
     # Name
-    category, body = cleanup_block(res_type[0])
+    category, body = cleanup_block(res_type[1])
     if body is None:
         continue
     res_name = body
     sensors_data[vendor][camera][res_name] = {}
 
     # Focal Length
-    category, body = cleanup_block(res_type[1])
+    category, body = cleanup_block(res_type[2])
     if body:
         sensors_data[vendor][camera][res_name]["focal_length"] = extract_single_number(
             body
         )
 
     # Resolution
-    category, body = cleanup_block(res_type[2])
+    category, body = cleanup_block(res_type[3])
     if body:
         res = extract_dual_numbers(body)
         sensors_data[vendor][camera][res_name]["resolution"] = {
@@ -97,12 +93,12 @@ for block in blocks[1:]:
         }
 
     # Sensor Size (mm)
-    category, body = cleanup_block(res_type[3])
+    category, body = cleanup_block(res_type[4])
     if body:
         mm = extract_dual_numbers(body)
 
     # Sensor Size (inches)
-    category, body = cleanup_block(res_type[4])
+    category, body = cleanup_block(res_type[5])
     if body:
         inches = extract_dual_numbers(body)
 

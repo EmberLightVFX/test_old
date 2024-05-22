@@ -56,7 +56,6 @@ body:
 
         You can ether resolution and sensor size (mm and inches) any way you want. Only the two first values found will be processed.
 
-  #### Resolution 1
   - type: markdown
     attributes:
       value: |
@@ -96,7 +95,6 @@ body:
       description: ":red_circle: Enter at least one of mm or inches"
       placeholder: 0.968 in x 0.543 in
 
-  #### Resolution 2
   - type: markdown
     attributes:
       value: |

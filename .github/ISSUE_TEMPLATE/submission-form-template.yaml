@@ -93,6 +93,7 @@ body:
     attributes:
       label: Focal Length
       description: (Optional) What's the lens's focal length?
+      placeholder: 50mm
 
   - type: input
     id: resolution-r1

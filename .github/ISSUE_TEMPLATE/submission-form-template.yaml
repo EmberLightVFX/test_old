@@ -9,6 +9,19 @@ body:
       value: |
         Thanks for taking the time to make the database better!
 
+  - type: textarea
+    id: references
+    attributes:
+      label: References
+      description: Please fill out where you have found the information.
+        This is just to keep track on where it all comes from.
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: "# Camera information"
+
   - type: dropdown
     id: vendor
     attributes:
@@ -40,6 +53,12 @@ body:
       value: C300 Mark II
     validations:
       required: true
+
+  - type: textarea
+    id: info
+    attributes:
+      label: Additional Information
+      description: Enter any kind of good-to-have information like lens mount, shutter type, iso range etc.
       
   - type: markdown
     attributes:
@@ -58,8 +77,7 @@ body:
 #### Resolution 1
   - type: markdown
     attributes:
-      value: |
-        ## Resolution 1
+      value: "## Resolution 1"
 
   - type: input
     id: name-r1
@@ -98,8 +116,7 @@ body:
 #### Resolution 2
   - type: markdown
     attributes:
-      value: |
-        ## Resolution 2
+      value: "## Resolution 2"
 
   - type: input
     id: name-r2
@@ -140,8 +157,7 @@ body:
 #### Resolution 3
   - type: markdown
     attributes:
-      value: |
-        ## Resolution 3
+      value: "## Resolution 3"
 
   - type: input
     id: name-r3
@@ -182,8 +198,7 @@ body:
 #### Resolution 4
   - type: markdown
     attributes:
-      value: |
-        ## Resolution 4
+      value: "## Resolution 4"
 
   - type: input
     id: name-r4
@@ -224,8 +239,7 @@ body:
 #### Resolution 5
   - type: markdown
     attributes:
-      value: |
-        ## Resolution 5
+      value: "## Resolution 5"
 
   - type: input
     id: name-r5
@@ -266,8 +280,7 @@ body:
 #### Resolution 6
   - type: markdown
     attributes:
-      value: |
-        ## Resolution 6
+      value: "## Resolution 6"
 
   - type: input
     id: name-r6
@@ -308,8 +321,7 @@ body:
 #### Resolution 7
   - type: markdown
     attributes:
-      value: |
-        ## Resolution 7
+      value: "## Resolution 7"
 
   - type: input
     id: name-r7
@@ -350,8 +362,7 @@ body:
 #### Resolution 8
   - type: markdown
     attributes:
-      value: |
-        ## Resolution 8
+      value: "## Resolution 8"
 
   - type: input
     id: name-r8
@@ -392,8 +403,7 @@ body:
 #### Resolution 9
   - type: markdown
     attributes:
-      value: |
-        ## Resolution 9
+      value: "## Resolution 9"
 
   - type: input
     id: name-r9
@@ -434,8 +444,7 @@ body:
 #### Resolution 10
   - type: markdown
     attributes:
-      value: |
-        ## Resolution 10
+      value: "## Resolution 10"
 
   - type: input
     id: name-r10

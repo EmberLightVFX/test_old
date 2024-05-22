@@ -40,6 +40,13 @@ body:
       value: C300 Mark II
     validations:
       required: true
+      
+  - type: markdown
+    attributes:
+      value: |
+        ## Resolution types
+        Below you'll find 10 available resolution types you can fill out.
+        A very <span style='color: red;'>long</span> sentence.
 
   - type: textarea
     id: resolution-type

@@ -61,7 +61,7 @@ body:
     attributes:
       label: Additional Information
       description: Enter any kind of good-to-have information like lens mount, shutter type, iso range etc.
-      
+
   - type: markdown
     attributes:
       value: |
@@ -76,7 +76,7 @@ body:
 
         You can ether resolution and sensor size (mm and inches) any way you want. Only the two first values found will be processed.
 
-#### Resolution 1
+  #### Resolution 1
   - type: markdown
     attributes:
       value: "## Resolution 1"
@@ -87,6 +87,8 @@ body:
       label: Name
       description: ":red_circle: What's the resolution type's name?"
       value: All
+    validations:
+      required: true
 
   - type: input
     id: focal_length-r1
@@ -118,7 +120,7 @@ body:
       description: ":red_circle: Enter at least one of mm or inches"
       placeholder: 0.968 in x 0.543 in
 
-#### Resolution 2
+  #### Resolution 2
   - type: markdown
     attributes:
       value: "## Resolution 2"
@@ -158,8 +160,7 @@ body:
       description: ":red_circle: Enter at least one of mm or inches"
       placeholder: 0.968 in x 0.543 in
 
-      
-#### Resolution 3
+  #### Resolution 3
   - type: markdown
     attributes:
       value: "## Resolution 3"
@@ -199,8 +200,7 @@ body:
       description: ":red_circle: Enter at least one of mm or inches"
       placeholder: 0.968 in x 0.543 in
 
-      
-#### Resolution 4
+  #### Resolution 4
   - type: markdown
     attributes:
       value: "## Resolution 4"
@@ -240,8 +240,7 @@ body:
       description: ":red_circle: Enter at least one of mm or inches"
       placeholder: 0.968 in x 0.543 in
 
-      
-#### Resolution 5
+  #### Resolution 5
   - type: markdown
     attributes:
       value: "## Resolution 5"
@@ -281,8 +280,7 @@ body:
       description: ":red_circle: Enter at least one of mm or inches"
       placeholder: 0.968 in x 0.543 in
 
-      
-#### Resolution 6
+  #### Resolution 6
   - type: markdown
     attributes:
       value: "## Resolution 6"
@@ -322,8 +320,7 @@ body:
       description: ":red_circle: Enter at least one of mm or inches"
       placeholder: 0.968 in x 0.543 in
 
-      
-#### Resolution 7
+  #### Resolution 7
   - type: markdown
     attributes:
       value: "## Resolution 7"
@@ -363,8 +360,7 @@ body:
       description: ":red_circle: Enter at least one of mm or inches"
       placeholder: 0.968 in x 0.543 in
 
-      
-#### Resolution 8
+  #### Resolution 8
   - type: markdown
     attributes:
       value: "## Resolution 8"
@@ -404,8 +400,7 @@ body:
       description: ":red_circle: Enter at least one of mm or inches"
       placeholder: 0.968 in x 0.543 in
 
-      
-#### Resolution 9
+  #### Resolution 9
   - type: markdown
     attributes:
       value: "## Resolution 9"
@@ -445,8 +440,7 @@ body:
       description: ":red_circle: Enter at least one of mm or inches"
       placeholder: 0.968 in x 0.543 in
 
-      
-#### Resolution 10
+  #### Resolution 10
   - type: markdown
     attributes:
       value: "## Resolution 10"

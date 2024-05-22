@@ -67,3 +67,9 @@ body:
       label: Name
       description: ":red_circle: What's the resolution type's name?"
       value: All
+
+  - type: input
+    id: focal_length-r1
+    attributes:
+      label: Focal Length
+      description: (Optional) What's the lens's focal length?

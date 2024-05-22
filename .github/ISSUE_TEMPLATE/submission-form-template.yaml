@@ -73,3 +73,64 @@ body:
     attributes:
       label: Focal Length
       description: (Optional) What's the lens's focal length?
+
+  - type: input
+    id: resolution-r1
+    attributes:
+      label: Resolution
+      description: (Optional)
+      placeholder: 4096 x 2160
+
+  - type: input
+    id: mm-r1
+    attributes:
+      label: Sensor size (mm)
+      description: ":red_circle: Enter at least one of mm or inches"
+      placeholder: 24.6 x 13.8
+
+  - type: input
+    id: inches-r1
+    attributes:
+      label: Sensor size (inches)
+      description: ":red_circle: Enter at least one of mm or inches"
+      placeholder: 0.968 in x 0.543 in
+
+  #### Resolution 2
+  - type: markdown
+    attributes:
+      value: |
+        ## Resolution 2
+
+  - type: input
+    id: name-r2
+    attributes:
+      label: Name
+      description: ":red_circle: What's the resolution type's name?"
+      value: All
+
+  - type: input
+    id: focal_length-r2
+    attributes:
+      label: Focal Length
+      description: (Optional) What's the lens's focal length?
+
+  - type: input
+    id: resolution-r2
+    attributes:
+      label: Resolution
+      description: (Optional)
+      placeholder: 4096 x 2160
+
+  - type: input
+    id: mm-r2
+    attributes:
+      label: Sensor size (mm)
+      description: ":red_circle: Enter at least one of mm or inches"
+      placeholder: 24.6 x 13.8
+
+  - type: input
+    id: inches-r2
+    attributes:
+      label: Sensor size (inches)
+      description: ":red_circle: Enter at least one of mm or inches"
+      placeholder: 0.968 in x 0.543 in

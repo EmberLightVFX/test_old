@@ -43,24 +43,28 @@ camera = None
 
 blocks = BODY.strip().split("### Name", 1)
 print("BLOCKSSS", blocks)
-# Camera info
-for block in blocks[0].strip().split("### "):
-    print("BLOCK", block)
-    category, body = cleanup_block(block)
-    if category == "Vendor":
-        vendor = body
-        if vendor not in sensors_data:
-            sensors_data[vendor] = {}
+print("blocks[0].strip()", blocks[0].strip())
+print('blocks[0].strip().split("### ")', blocks[0].strip().split("### "))
+print('blocks[0].split("### ")', blocks[0].split("### "))
+## Camera info
+camera_info = blocks[0].strip().split("### ")
 
-    elif category == "Camera":
-        camera = body
-        if camera not in sensors_data[vendor]:
-            sensors_data[vendor][camera] = {}
+# Vendor
+category, body = cleanup_block(camera_info[1])
+if body == "Custom":
+    category, body = cleanup_block(camera_info[2])
+vendor = body
+if vendor not in sensors_data:
+    sensors_data[vendor] = {}
 
-    elif category == "Additional Information" and body:
-        sensors_data[vendor][camera]["info"] = body
+# Camera
+category, body = cleanup_block(camera_info[3])
+camera = body
+if camera not in sensors_data[vendor]:
+    sensors_data[vendor][camera] = {}
 
-# All resolution types
+
+## All resolution types
 for block in blocks[1:]:
     mm = None
     inches = None

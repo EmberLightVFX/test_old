@@ -13,7 +13,7 @@ body:
     id: vendor
     attributes:
       label: Vendor
-      description: Select the camera manufacturer.
+      # description: Select the camera manufacturer.
       options:
         - Canon
         - Arri
@@ -36,7 +36,8 @@ body:
     id: camera
     attributes:
       label: Camera
-      description: What's the camera name?
+      description: |
+        :red_circle: What's the camera's name?
       value: C300 Mark II
     validations:
       required: true
@@ -44,44 +45,99 @@ body:
   - type: markdown
     attributes:
       value: |
-        ## Resolution types
+        # Resolution types
         Below you'll find 10 available resolution types you can fill out.
-        A very <span style='color: red;'>long</span> sentence.
+        :red_circle: Type name and ether mm or inches needs to filled out or else the information isn't valid.
+        If the sensor size doesn't change per resolution, name the resolution type `All` and skip entering any resolution
 
-        ### Field 1
-        <span style="color: red;">This is important text in red.</span>
-
-        ### Field 2
-        :blue_book: **Documentation**
-
-        Provide details for field 2 here.
-
-        ### Field 3
-        <span style="color: green;">Provide details for field 3. This text is green.</span>
-
-        ### Field 1
-        :red_circle: Important Note
-
-        ### Field 2
-        :blue_book: Documentation
-
-        ### Field 3
-        :green_heart: Environment
-
-  - type: textarea
-    id: resolution-type
-    attributes:
-      label: Resolution Type
-      description: |
-        List of resolution types and their information.
-        Modify the template below to fit the new sensor information.
         If you can't find both mm and inch size for the sensor, enter one and the other will automatically be calculated.
+
         Focal length is optional and only used for cameras with fixed lenses, eg iPhone.
+
+        You can ether resolution and sensor size (mm and inches) any way you want. Only the two first values found will be processed.
+
+  #### Resolution 1
+  - type: markdown
+    attributes:
       value: |
-        - Type: All
-          Focal Length (optional): 
-          Resolution: 4096 x 2160
-          mm: 24.6 x 13.8
-          inch: 0.968 x 0.543
-    validations:
-      required: true
+        ## Resolution 1
+
+  - type: input
+    id: name-r1
+    attributes:
+      label: Name
+      description: |
+        :red_circle: What's the resolution type's name?
+      value: All
+
+  - type: input
+    id: focal_length-r1
+    attributes:
+      label: Focal Length
+      description: (Optional) What's the lens's focal length?
+
+  - type: input
+    id: resolution-r1
+    attributes:
+      label: Resolution
+      description: (Optional)
+      placeholder: 4096 x 2160
+
+  - type: input
+    id: mm-r1
+    attributes:
+      label: Sensor size (mm)
+      description: |
+        :red_circle: Enter at least one of mm or inches
+      placeholder: 24.6 x 13.8
+
+  - type: input
+    id: mm-r1
+    attributes:
+      label: Sensor size (inches)
+      description: |
+        :red_circle: Enter at least one of mm or inches
+      placeholder: 0.968 in x 0.543 in
+
+  #### Resolution 2
+  - type: markdown
+    attributes:
+      value: |
+        ## Resolution 2
+
+  - type: input
+    id: name-r2
+    attributes:
+      label: Name
+      description: |
+        :red_circle: What's the resolution type's name?
+      value: All
+
+  - type: input
+    id: focal_length-r2
+    attributes:
+      label: Focal Length
+      description: (Optional) What's the lens's focal length?
+
+  - type: input
+    id: resolution-r2
+    attributes:
+      label: Resolution
+      description: (Optional)
+      placeholder: 4096 x 2160
+
+  - type: input
+    id: mm-r2
+    attributes:
+      label: Sensor size (mm)
+      description: |
+        :red_circle: Enter at least one of mm or inches
+      placeholder: 24.6 x 13.8
+
+  - type: input
+    id: mm-r2
+    attributes:
+      label: Sensor size (inches)
+      description: |
+        :red_circle: Enter at least one of mm or inches
+      placeholder: 0.968 in x 0.543 in

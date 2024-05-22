@@ -5,7 +5,7 @@ on:
     types: [opened]
 
 jobs:
-  process_submission:
+  create_pr:
     runs-on: ubuntu-latest
 
     steps:
@@ -16,26 +16,19 @@ jobs:
         id: info
         run: |
           VENDOR=$(echo "${{ github.event.issue.body }}" | awk '/### Vendor/{flag=1;next}/^###/{flag=0}flag' | tail -n +2)
+          if [ "$VENDOR" == "Custom" ]; then
+            VENDOR=$(echo "${{ github.event.issue.body }}" | awk '/### Custom Vendor/{flag=1;next}/^###/{flag=0}flag' | tail -n +2)
+          fi
           echo "vendor=$VENDOR" >> $GITHUB_ENV
-
-          CUSTOM_VENDOR=$(echo "${{ github.event.issue.body }}" | awk '/### Custom Vendor/{flag=1;next}/^###/{flag=0}flag' | tail -n +2)
-          echo "custom_vendor=$CUSTOM_VENDOR" >> $GITHUB_ENV
 
           CAMERA=$(echo "${{ github.event.issue.body }}" | awk '/### Camera/{flag=1;next}/^###/{flag=0}flag' | tail -n +2)
           echo "camera=$CAMERA" >> $GITHUB_ENV
-
-          RESOLUTION_TYPE=$(echo "${{ github.event.issue.body }}" | awk '/### Resolution Type/{flag=1;next}/^###/{flag=0}flag' | tail -n +2)
-          echo "resolution_type<<EOF" >> $GITHUB_ENV
-          echo "$RESOLUTION_TYPE" >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
 
       - name: Debug extracted data
         run: |
           echo "Event Body: ${{ github.event.issue.body }}"
           echo "Vendor: ${{ env.vendor }}"
-          echo "Custom Vendor: ${{ env.custom_vendor }}"
           echo "Camera: ${{ env.camera }}"
-          echo "Resolution Type: ${{ env.resolution_type }}"
 
       - name: Set up Python
         uses: actions/setup-python@v2
@@ -44,22 +37,8 @@ jobs:
 
       - name: Process and update JSON with Python
         run: |
-          VENDOR="${{ env.vendor }}"
-          CUSTOM_VENDOR="${{ env.custom_vendor }}"
-          CAMERA="${{ env.camera }}"
-          RESOLUTION_TYPE="${{ env.resolution_type }}"
-
-          if [ "$VENDOR" == "Custom" ]; then
-            VENDOR="$CUSTOM_VENDOR"
-          fi
-
-          if [ -z "$VENDOR" ] || [ -z "$CAMERA" ] || [ -z "$RESOLUTION_TYPE" ]; then
-            echo "Missing required fields."
-            exit 1
-          fi
-
           # Call the Python script to update sensors.json
-          python3 scripts/update_sensors.py "$VENDOR" "$CAMERA" "$RESOLUTION_TYPE"
+          python3 scripts/update_sensors.py "${{ github.event.issue.body }}"
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5

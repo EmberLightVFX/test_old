@@ -2,14 +2,26 @@ import sys
 import json
 
 # Read input from stdin (provided via shell script)
-VENDOR = sys.argv[1]
-CAMERA = sys.argv[2]
-TYPE = sys.argv[3]
+print("-------------------")
+print(sys.argv[1])
+print("------------------")
+exit(1)
+#VENDOR = sys.argv[1]
+#CAMERA = sys.argv[2]
+#TYPE = sys.argv[3]
 
-print("VENDOR:", VENDOR)
-print("CAMERA:", CAMERA)
-print("TYPE:", TYPE)
-
+VENDOR = "Canon"
+CAMERA = "C300 Mark II"
+TYPE = """- Type: All
+  Focal Length (optional): 
+  Resolution: 4096 x 2160
+  mm: 24.6 x 13.8
+  inch: 0.968 x 0.543
+- Type: All2
+  Focal Length (optional): 
+  Resolution: 4096 x 2160
+  mm: 24.6 x 13.8
+  inch: 0.968 x 0.543"""
 
 # Read existing sensors.json file if it exists
 try:
@@ -25,11 +37,13 @@ if CAMERA not in sensors_data[VENDOR]:
     sensors_data[VENDOR][CAMERA] = {}
 
 resolutions = []
-for block in TYPE.strip().split('\\n\\n'):
+for block in TYPE.strip().split('\n-'):
+    print("Block:", block)
     resolution = {}
     for line in block.strip().split('\\n'):
         if ':' in line:
             key, value = [x.strip() for x in line.split(':', 1)]
+            #print("key:", key, " ------ val:", value)
             if key.lower() in ['resolution', 'mm', 'inch']:
                 width, height = [float(x) for x in value.split('x')]
                 resolution[key.lower()] = {'width': width, 'height': height}
@@ -39,7 +53,7 @@ for block in TYPE.strip().split('\\n\\n'):
                 resolution[key.lower().replace(' ', '_')] = value
     resolutions.append(resolution)
 
-print(resolutions)
+#print(resolutions)
 
 # Update the dictionary with the new resolution data
 for resolution in resolutions:

@@ -32,10 +32,12 @@ body:
       label: Vendor
       # description: Select the camera manufacturer.
       options:
-        - Canon
         - Arri
+        - Blackmagic Design
+        - Canon
+        - Panasonic
+        - RED
         - Sony
-        - Red
         - Custom
     validations:
       required: true
@@ -52,7 +54,7 @@ body:
     attributes:
       label: Camera
       description: What's the camera's name?
-      value: C300 Mark II
+      placeholder: ex. Alexa Mini
     validations:
       required: true
 
@@ -103,7 +105,6 @@ body:
       label: Resolution
       description: (Optional)
       placeholder: 4096 x 2160
-      value: 4096 x 2160
 
   - type: input
     id: mm-r1
@@ -111,7 +112,6 @@ body:
       label: Sensor size (mm)
       description: ":red_circle: Enter at least one of mm or inches"
       placeholder: 24.6 x 13.8
-      value: 24.6 x 13.8mm
 
   - type: input
     id: inches-r1

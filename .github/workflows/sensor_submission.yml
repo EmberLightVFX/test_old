@@ -46,7 +46,8 @@ jobs:
           token: ${{ secrets.PAT }}
           commit-message: New sensor data for ${{ env.camera }} - ${{ env.vendor }}
           labels: submission
-          branch: main
+          branch: ${{ env.camera }}_${{ env.vendor }}
+          branch-suffix: timestamp
           title: 'New sensor: ${{ env.vendor }} - ${{ env.camera }}'
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           body: |

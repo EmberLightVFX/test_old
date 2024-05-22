@@ -45,10 +45,11 @@ jobs:
         with:
           token: ${{ secrets.PAT }}
           commit-message: New sensor data for ${{ env.camera }} - ${{ env.vendor }}
+          labels: submission
+          branch: main
           title: 'New sensor: ${{ env.vendor }} - ${{ env.camera }}'
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           body: |
             This pull request adds new sensor data for the camera ${{ env.camera }} by ${{ env.vendor }}.
 
             ${{ github.event.issue.body }}
-          labels: submission

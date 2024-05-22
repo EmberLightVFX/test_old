@@ -36,8 +36,7 @@ body:
     id: camera
     attributes:
       label: Camera
-      description: |
-        :red_circle: What's the camera's name?
+      description: What's the camera's name?
       value: C300 Mark II
     validations:
       required: true
@@ -56,3 +55,15 @@ body:
 
         You can ether resolution and sensor size (mm and inches) any way you want. Only the two first values found will be processed.
 
+  #### Resolution 1
+  - type: markdown
+    attributes:
+      value: |
+        ## Resolution 1
+
+  - type: input
+    id: name-r1
+    attributes:
+      label: Name
+      description: ":red_circle: What's the resolution type's name?"
+      value: All

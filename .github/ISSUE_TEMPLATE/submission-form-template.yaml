@@ -123,7 +123,7 @@ body:
     attributes:
       label: Name
       description: ":red_circle: What's the resolution type's name?"
-      placeholder: All
+      placeholder: "2K Anamorphic 2.39:1"
 
   - type: input
     id: focal_length-r2
@@ -164,7 +164,7 @@ body:
     attributes:
       label: Name
       description: ":red_circle: What's the resolution type's name?"
-      placeholder: All
+      placeholder: "2K Anamorphic 2.39:1"
 
   - type: input
     id: focal_length-r3
@@ -205,7 +205,7 @@ body:
     attributes:
       label: Name
       description: ":red_circle: What's the resolution type's name?"
-      placeholder: All
+      placeholder: "2K Anamorphic 2.39:1"
 
   - type: input
     id: focal_length-r4
@@ -246,7 +246,7 @@ body:
     attributes:
       label: Name
       description: ":red_circle: What's the resolution type's name?"
-      placeholder: All
+      placeholder: "2K Anamorphic 2.39:1"
 
   - type: input
     id: focal_length-r5
@@ -287,7 +287,7 @@ body:
     attributes:
       label: Name
       description: ":red_circle: What's the resolution type's name?"
-      placeholder: All
+      placeholder: "2K Anamorphic 2.39:1"
 
   - type: input
     id: focal_length-r6
@@ -328,7 +328,7 @@ body:
     attributes:
       label: Name
       description: ":red_circle: What's the resolution type's name?"
-      placeholder: All
+      placeholder: "2K Anamorphic 2.39:1"
 
   - type: input
     id: focal_length-r7
@@ -369,7 +369,7 @@ body:
     attributes:
       label: Name
       description: ":red_circle: What's the resolution type's name?"
-      placeholder: All
+      placeholder: "2K Anamorphic 2.39:1"
 
   - type: input
     id: focal_length-r8
@@ -410,7 +410,7 @@ body:
     attributes:
       label: Name
       description: ":red_circle: What's the resolution type's name?"
-      placeholder: All
+      placeholder: "2K Anamorphic 2.39:1"
 
   - type: input
     id: focal_length-r9
@@ -451,7 +451,7 @@ body:
     attributes:
       label: Name
       description: ":red_circle: What's the resolution type's name?"
-      placeholder: All
+      placeholder: "2K Anamorphic 2.39:1"
 
   - type: input
     id: focal_length-r10

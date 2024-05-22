@@ -45,7 +45,7 @@ jobs:
         run: |
           CAMERA=$(echo '${{ env.camera }}' | tr ' ' '_' | tr -cd '[:alnum:]_')
           VENDOR=$(echo '${{ env.vendor }}' | tr ' ' '_' | tr -cd '[:alnum:]_')
-          echo "branch_name=$CAMERA_$VENDOR" >> $GITHUB_ENV
+          echo "branch_name=${CAMERA}_${VENDOR}" >> $GITHUB_ENV
 
 
       - name: Create Pull Request

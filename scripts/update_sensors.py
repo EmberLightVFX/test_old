@@ -107,6 +107,11 @@ for block in blocks[1:]:
     elif not mm:
         mm = [inches[0] * 25.4, inches[1] * 25.4]
 
+    mm[0] = round(mm[0], 3)
+    mm[1] = round(mm[1], 3)
+    inches[0] = round(inches[0], 3)
+    inches[1] = round(inches[1], 3)
+
     sensors_data[vendor][camera][res_name]["mm"] = {
         "width": mm[0],
         "height": mm[1],

@@ -40,13 +40,21 @@ jobs:
           # Call the Python script to update sensors.json
           python3 scripts/update_sensors.py "${{ github.event.issue.body }}"
 
+
+      - name: Create a safe branch name
+        run: |
+          CAMERA=$(echo '${{ env.camera }}' | tr ' ' '_' | tr -cd '[:alnum:]_')
+          VENDOR=$(echo '${{ env.vendor }}' | tr ' ' '_' | tr -cd '[:alnum:]_')
+          echo "branch_name=$CAMERA_$VENDOR" >> $GITHUB_ENV
+
+
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.PAT }}
           commit-message: New sensor data for ${{ env.camera }} - ${{ env.vendor }}
           labels: submission
-          branch: ${{ env.camera }}_${{ env.vendor }}
+          branch: ${{ env.branch_name }}
           branch-suffix: timestamp
           title: 'New sensor: ${{ env.vendor }} - ${{ env.camera }}'
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>

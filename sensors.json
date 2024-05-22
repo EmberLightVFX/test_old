@@ -1,42 +1,62 @@
 {
-    "arri": {
-        "alexa mini": {
-            "4K UHD": {
-                "focal length": "",
-                "crop factor": 1.6,
-                "resolution": {
-                    "width": 3840,
-                    "height": 2160
-                },
-                "mm": {
-                    "width": 26.40,
-                    "height": 14.85,
-                    "diagonal": 30.29
-                },
-                "inch": {
-                    "width": 1.039,
-                    "height": 0.585,
-                    "diagonal": 1.1924
-                }
-            },
-            "2K Anamorphic 2.39:1": {
-                "focal length": "",
-                "crop factor": 1.6,
-                "resolution": {
-                    "width": 2560,
-                    "height": 2145
-                },
-                "mm": {
-                    "width": 21.12,
-                    "height": 17.70,
-                    "diagonal": 27.556
-                },
-                "inch": {
-                    "width": 0.831,
-                    "height": 0.697,
-                    "diagonal": 1.0846
-                }
-            }
+  "arri": {
+    "alexa mini": {
+      "4K UHD": {
+        "focal length": "",
+        "crop factor": 1.6,
+        "resolution": {
+          "width": 3840,
+          "height": 2160
+        },
+        "mm": {
+          "width": 26.4,
+          "height": 14.85,
+          "diagonal": 30.29
+        },
+        "inch": {
+          "width": 1.039,
+          "height": 0.585,
+          "diagonal": 1.1924
         }
+      },
+      "2K Anamorphic 2.39:1": {
+        "focal length": "",
+        "crop factor": 1.6,
+        "resolution": {
+          "width": 2560,
+          "height": 2145
+        },
+        "mm": {
+          "width": 21.12,
+          "height": 17.7,
+          "diagonal": 27.556
+        },
+        "inch": {
+          "width": 0.831,
+          "height": 0.697,
+          "diagonal": 1.0846
+        }
+      }
     }
+  },
+  "Canon": {
+    "C300 Mark II": {
+      "All": {
+        "resolution": {
+          "width": 4096.0,
+          "height": 2160.0
+        },
+        "mm": {
+          "width": 24.6,
+          "height": 13.8,
+          "diagonal": 28.206382256503584
+        },
+        "inches": {
+          "width": 0.9685039370078741,
+          "height": 0.5433070866141733,
+          "diagonal": 1.110487490413527
+        }
+      }
+    }
+  }
 }

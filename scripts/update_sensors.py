@@ -42,9 +42,10 @@ vendor = None
 camera = None
 
 blocks = BODY.strip().split("### Name", 1)
-
+print("BLOCKSSS", blocks)
 # Camera info
 for block in blocks[0].strip().split("### "):
+    print("BLOCK", block)
     category, body = cleanup_block(block)
     if category == "Vendor":
         vendor = body

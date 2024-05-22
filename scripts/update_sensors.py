@@ -8,9 +8,7 @@ BODY = sys.argv[1]
 
 
 def cleanup_block(text: str) -> tuple[str, str | None]:
-    print("cleanup_block Text:", text)
     lines = text.splitlines()
-    print("cleanup_block lines:", lines)
     category = str(lines[0])
     body = None
     if str(lines[2]) != "_No response_":

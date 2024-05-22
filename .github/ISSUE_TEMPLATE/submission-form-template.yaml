@@ -48,6 +48,26 @@ body:
         Below you'll find 10 available resolution types you can fill out.
         A very <span style='color: red;'>long</span> sentence.
 
+        ### Field 1
+        <span style="color: red;">This is important text in red.</span>
+
+        ### Field 2
+        :blue_book: **Documentation**
+
+        Provide details for field 2 here.
+
+        ### Field 3
+        <span style="color: green;">Provide details for field 3. This text is green.</span>
+
+        ### Field 1
+        :red_circle: Important Note
+
+        ### Field 2
+        :blue_book: Documentation
+
+        ### Field 3
+        :green_heart: Environment
+
   - type: textarea
     id: resolution-type
     attributes:

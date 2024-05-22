@@ -115,12 +115,12 @@ for block in blocks[1:]:
     sensors_data[vendor][camera][res_name]["mm"] = {
         "width": mm[0],
         "height": mm[1],
-        "diagonal": math.sqrt(mm[0] ** 2 + mm[1] ** 2),
+        "diagonal": round(math.sqrt(mm[0] ** 2 + mm[1] ** 2), 3),
     }
     sensors_data[vendor][camera][res_name]["inches"] = {
         "width": inches[0],
         "height": inches[1],
-        "diagonal": math.sqrt(inches[0] ** 2 + inches[1] ** 2),
+        "diagonal": round(math.sqrt(inches[0] ** 2 + inches[1] ** 2), 3),
     }
 
 

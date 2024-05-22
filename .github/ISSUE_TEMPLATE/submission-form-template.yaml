@@ -56,6 +56,7 @@ body:
 
         You can ether resolution and sensor size (mm and inches) any way you want. Only the two first values found will be processed.
 
+  #### Resolution 1
   - type: markdown
     attributes:
       value: |
@@ -65,8 +66,7 @@ body:
     id: name-r1
     attributes:
       label: Name
-      description: |
-        :red_circle: What's the resolution type's name?
+      description: ":red_circle: What's the resolution type's name?"
       value: All
 
   - type: input
@@ -86,18 +86,17 @@ body:
     id: mm-r1
     attributes:
       label: Sensor size (mm)
-      description: |
-        :red_circle: Enter at least one of mm or inches
+      description: ":red_circle: Enter at least one of mm or inches"
       placeholder: 24.6 x 13.8
 
   - type: input
     id: mm-r1
     attributes:
       label: Sensor size (inches)
-      description: |
-        :red_circle: Enter at least one of mm or inches
+      description: ":red_circle: Enter at least one of mm or inches"
       placeholder: 0.968 in x 0.543 in
 
+  #### Resolution 2
   - type: markdown
     attributes:
       value: |
@@ -107,8 +106,7 @@ body:
     id: name-r2
     attributes:
       label: Name
-      description: |
-        :red_circle: What's the resolution type's name?
+      description: ":red_circle: What's the resolution type's name?"
       value: All
 
   - type: input
@@ -128,14 +126,12 @@ body:
     id: mm-r2
     attributes:
       label: Sensor size (mm)
-      description: |
-        :red_circle: Enter at least one of mm or inches
+      description: ":red_circle: Enter at least one of mm or inches"
       placeholder: 24.6 x 13.8
 
   - type: input
     id: mm-r2
     attributes:
       label: Sensor size (inches)
-      description: |
-        :red_circle: Enter at least one of mm or inches
+      description: ":red_circle: Enter at least one of mm or inches"
       placeholder: 0.968 in x 0.543 in

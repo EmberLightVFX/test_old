@@ -57,8 +57,9 @@ jobs:
           branch: ${{ env.branch_name }}
           branch-suffix: timestamp
           title: 'New sensor: ${{ env.vendor }} - ${{ env.camera }}'
-          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           body: |
             This pull request adds new sensor data for the camera ${{ env.camera }} by ${{ env.vendor }}.
+
+            Closes #${{ github.event.issue.number }}
 
             ${{ github.event.issue.body }}

@@ -3,7 +3,7 @@ import re
 import sys
 import json
 
-DEBUG = True
+DEBUG = False
 # Read input from stdin (provided via shell script)
 if DEBUG:
     from pprint import pprint

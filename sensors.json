@@ -18,24 +18,6 @@
           "height": 0.585,
           "diagonal": 1.1924
         }
-      },
-      "2K Anamorphic 2.39:1": {
-        "focal length": "",
-        "crop factor": 1.6,
-        "resolution": {
-          "width": 2560,
-          "height": 2145
-        },
-        "mm": {
-          "width": 21.12,
-          "height": 17.7,
-          "diagonal": 27.556
-        },
-        "inch": {
-          "width": 0.831,
-          "height": 0.697,
-          "diagonal": 1.0846
-        }
       }
     }
   }

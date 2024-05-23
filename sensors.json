@@ -36,6 +36,22 @@
           "height": 0.697,
           "diagonal": 1.0846
         }
+      },
+      "3.4K Open Gate": {
+        "resolution": {
+          "width": 3424.0,
+          "height": 2202.0
+        },
+        "mm": {
+          "width": 28.25,
+          "height": 18.17,
+          "diagonal": 33.589
+        },
+        "inches": {
+          "width": 1.112,
+          "height": 0.715,
+          "diagonal": 1.322
+        }
       }
     }
   }

@@ -50,6 +50,38 @@
           "height": 0.585,
           "diagonal": 1.192
         }
+      },
+      "2.8K 4:3": {
+        "resolution": {
+          "width": 2880.0,
+          "height": 2160.0
+        },
+        "mm": {
+          "width": 23.76,
+          "height": 17.82,
+          "diagonal": 29.7
+        },
+        "inches": {
+          "width": 0.935,
+          "height": 0.702,
+          "diagonal": 1.169
+        }
+      },
+      "2.8K": {
+        "resolution": {
+          "width": 2880.0,
+          "height": 1620.0
+        },
+        "mm": {
+          "width": 23.76,
+          "height": 13.37,
+          "diagonal": 27.263
+        },
+        "inches": {
+          "width": 0.935,
+          "height": 0.526,
+          "diagonal": 1.073
+        }
       }
     }
   }

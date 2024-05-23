@@ -36,6 +36,22 @@
           "height": 0.697,
           "diagonal": 1.0846
         }
+      },
+      "2.8K 4:3": {
+        "resolution": {
+          "width": 2880.0,
+          "height": 2160.0
+        },
+        "mm": {
+          "width": 23.76,
+          "height": 17.82,
+          "diagonal": 29.7
+        },
+        "inches": {
+          "width": 0.935,
+          "height": 0.702,
+          "diagonal": 1.169
+        }
       }
     }
   }

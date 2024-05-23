@@ -19,10 +19,14 @@ jobs:
           if [ "$VENDOR" == "Other" ]; then
             VENDOR=$(echo "${{ github.event.issue.body }}" | awk '/### Other Vendor/{getline; getline; print; exit}')
           fi
+          echo "vendor<<EOF" >> $GITHUB_ENV
           echo "$VENDOR" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
 
           CAMERA=$(echo "${{ github.event.issue.body }}" | awk '/### Vendor/{getline; getline; print; exit}')
+          echo "camera<<EOF" >> $GITHUB_ENV
           echo "$CAMERA" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
 
       - name: Debug extracted data
         run: |
@@ -57,7 +61,7 @@ jobs:
           branch-suffix: timestamp
           title: ${{ github.event.issue.title }}
           body: |
-            This pull request adds new sensor data for the camera ${{ env.camera }} by ${{ env.vendor }}.
+            This pull request adds new sensor data for the camera ${{ env.camera }} by ${{ env.vendor }}
 
             Closes #${{ github.event.issue.number }}
 

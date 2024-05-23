@@ -49,6 +49,37 @@
           "width": 0.935,
           "height": 0.526,
           "diagonal": 1.073
+      },
+      "3.4K Open Gate": {
+        "resolution": {
+          "width": 3424.0,
+          "height": 2202.0
+        },
+        "mm": {
+          "width": 28.25,
+          "height": 18.17,
+          "diagonal": 33.589
+        },
+        "inches": {
+          "width": 1.112,
+          "height": 0.715,
+          "diagonal": 1.322
+        }
+      },
+      "3.2K": {
+        "resolution": {
+          "width": 3200.0,
+          "height": 1800.0
+        },
+        "mm": {
+          "width": 26.4,
+          "height": 14.85,
+          "diagonal": 30.29
+        },
+        "inches": {
+          "width": 1.039,
+          "height": 0.585,
+          "diagonal": 1.192
         }
       }
     }

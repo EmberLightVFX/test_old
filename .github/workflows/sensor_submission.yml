@@ -19,12 +19,18 @@ jobs:
           if [ "$VENDOR" == "Other" ]; then
             VENDOR=$(echo "${{ github.event.issue.body }}" | awk '/### Other Vendor/{flag=1;next}/^###/{flag=0}flag' | tail -n +2)
           fi
-          echo "---- VENDOR -----"
-          echo "vendor=$VENDOR" >> $GITHUB_ENV
+          {
+            echo 'vendor<<EOF'
+            $VENDOR
+            echo EOF
+          } >> "$GITHUB_ENV"
 
           CAMERA=$(echo "${{ github.event.issue.body }}" | awk '/### Camera/{flag=1;next}/^###/{flag=0}flag' | tail -n +2)
-          echo "---- CAMERA -----"
-          echo "camera=$CAMERA" >> $GITHUB_ENV
+          {
+            echo 'camera<<EOF'
+            $CAMERA
+            echo EOF
+          } >> "$GITHUB_ENV"
 
       - name: Debug extracted data
         run: |

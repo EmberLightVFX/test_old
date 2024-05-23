@@ -56,7 +56,7 @@ jobs:
           labels: submission
           branch: ${{ env.branch_name }}
           branch-suffix: timestamp
-          title: 'New sensor: ${{ env.vendor }} - ${{ env.camera }}'
+          title: ${{ github.event.issue.title }}
           body: |
             This pull request adds new sensor data for the camera ${{ env.camera }} by ${{ env.vendor }}.
 

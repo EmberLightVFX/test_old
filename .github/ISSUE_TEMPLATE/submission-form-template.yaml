@@ -1,6 +1,6 @@
 name: Sensor Submission
 description: Fill out this form to create a new sensor and pull request.
-title: "[New Sensor]: Canon C300 Mark II"
+title: "[New Sensor]: "
 labels: [submission]
 
 body:
@@ -52,7 +52,7 @@ body:
     attributes:
       label: Camera
       description: What's the camera's name?
-      placeholder: ex. Alexa Mini
+      placeholder: ex. ALEXA Mini
     validations:
       required: true
 

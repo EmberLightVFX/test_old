@@ -3,15 +3,22 @@ import re
 import sys
 import json
 
+DEBUG = True
 # Read input from stdin (provided via shell script)
-BODY = sys.argv[1]
+if DEBUG:
+    from pprint import pprint
+
+    BODY = """"""
+
+else:
+    BODY = sys.argv[1]
 
 
 def cleanup_block(text: str) -> tuple[str, str | None]:
     lines = text.splitlines()
-    category = str(lines[0])
+    category = str(lines[0].strip())
     body = None
-    if str(lines[2]) != "_No response_":
+    if str(lines[2].strip()) != "_No response_":
         body = "\n".join(lines[2:]).strip()
     return (category, body)
 
@@ -59,12 +66,12 @@ if camera not in sensors_data[vendor]:
 
 
 ## All resolution types
-for block in blocks[1:]:
+for block in blocks[1].split("### Name"):
     mm = None
     inches = None
-
-    # Add back the name category that got removed from the first split
+    # Add back the name category that got removed from the split
     block = f"### Name{block}"
+
     res_type = block.strip().split("### ")
 
     # Name
@@ -125,5 +132,8 @@ for block in blocks[1:]:
 
 
 # Write the updated dictionary back to sensors.json
-with open("sensors.json", "w") as f:
-    json.dump(sensors_data, f, indent=2)
+if DEBUG:
+    pprint(sensors_data)
+else:
+    with open("sensors.json", "w") as f:
+        json.dump(sensors_data, f, indent=2)

@@ -15,15 +15,15 @@ jobs:
       - name: Extract issue details
         id: info
         run: |
-          VENDOR=$(echo "${{ github.event.issue.body }}" | awk '/### Vendor/{flag=1;next}/^###/{flag=0}flag' | awk '{$1=$1};1')
+          VENDOR=$(echo "${{ github.event.issue.body }}" | awk '/### Vendor/{getline; getline; print; exit}')
           if [ "$VENDOR" == "Other" ]; then
-            VENDOR=$(echo "${{ github.event.issue.body }}" | awk '/### Other Vendor/{flag=1;next}/^###/{flag=0}flag' | awk '{$1=$1};1')
+            VENDOR=$(echo "${{ github.event.issue.body }}" | awk '/### Other Vendor/{getline; getline; print; exit}')
           fi
           echo "vendor<<EOF" >> $GITHUB_ENV
           echo "$VENDOR" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
 
-          CAMERA=$(echo "${{ github.event.issue.body }}" | awk '/### Camera/{flag=1;next}/^###/{flag=0}flag' | awk '{$1=$1};1')
+          CAMERA=$(echo "${{ github.event.issue.body }}" | awk '/### Camera/{getline; getline; print; exit}')
           
           echo "camera<<EOF" >> $GITHUB_ENV
           echo "$CAMERA" >> $GITHUB_ENV

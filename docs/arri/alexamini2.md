@@ -2,8 +2,6 @@
 
 ## Info
 
-### Other
-
 Here is some good to have information
 And a new line with info :)
 

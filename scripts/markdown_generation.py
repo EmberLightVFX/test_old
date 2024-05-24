@@ -31,7 +31,9 @@ def generate_markdown(vendor: str, camera: str, info: dict[str, str] | None , re
                 if not has_info:
                     has_info = True
                     content = content + "## Info\n\n"
-                content = f"{content}### {key}\n\n{val}\n\n"
+                # Code for future info keys
+                # content = f"{content}### {key}\n\n{val}\n\n"
+                content = f"{content}{val}\n\n"
     content = f"{content}## Resolution Dimensions\n\n"
     return content + create_markdown_table(res)
 

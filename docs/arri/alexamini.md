@@ -1,5 +1,7 @@
 # ARRI - ALEXA Mini
 
+## Resolution Dimensions
+
 | Name           | Focal Length   | Resolution   | Sensor mm                       | Sensor inches                   |
 |----------------|----------------|--------------|---------------------------------|---------------------------------|
 | 4K UHD         |                | 3840 x 2160  | 26.4 x 14.85 (30.29 diagonal)   | 1.039 x 0.585 (1.1924 diagonal) |

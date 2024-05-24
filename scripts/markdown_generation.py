@@ -21,8 +21,17 @@ def create_markdown_table(res: list[list[str]]) -> str:
     return tabulate(tabular_data=res[1:], headers=res[0], tablefmt='github')
 
 
-def generate_markdown(vendor: str, camera: str, res: list[list[str]]):
+def generate_markdown(vendor: str, camera: str, info: dict[str, str] , res: list[list[str]]):
     content = f"# {vendor} - {camera}\n\n"
+
+    has_info = False
+    for key, val in info.items():
+        if val:
+            if not has_info:
+                has_info = True
+                content = content + "## Info\n\n"
+            content = f"{content}### {key}\n\n{val}\n\n"
+    content = f"{content}## Resolution Dimensions\n\n"
     return content + create_markdown_table(res)
 
 
@@ -51,7 +60,7 @@ for vendor, cameras in sensors.items():
             entries[i].append(f"{res_data["mm"]["width"]} x {res_data["mm"]["height"]} ({res_data["mm"]["diagonal"]} diagonal)")
             entries[i].append(f"{res_data["inches"]["width"]} x {res_data["inches"]["height"]} ({res_data["inches"]["diagonal"]} diagonal)")
 
-        markdown_content = generate_markdown(vendor, camera, entries)
+        markdown_content = generate_markdown(vendor, camera, data["info"], entries)
 
         with open(os.path.join(docs_dir, filepath), "w") as md_file:
             md_file.write(markdown_content)

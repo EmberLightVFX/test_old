@@ -1,5 +1,12 @@
 # ARRI - ALEXA Mini2
 
+## Info
+
+### Other
+
+Here is some good to have information
+And a new line with info :)
+
 ## Resolution Dimensions
 
 | Name   | Focal Length   | Resolution   | Sensor mm                       | Sensor inches                  |

@@ -70,7 +70,7 @@ if camera not in sensors_data[vendor]:
 category, body = cleanup_block(camera_info[5])
 if body and "camera" not in sensors_data[vendor][camera]:
     sensors_data[vendor][camera]["info"] = {}
-    sensors_data[vendor][camera]["info"]["other"] = body
+    sensors_data[vendor][camera]["info"]["Other"] = body
 
 # Sensor Dimensions
 if "sensor dimensions" not in sensors_data[vendor][camera]:
@@ -98,6 +98,10 @@ for block in blocks[1].split("### Name"):
         sensors_data[vendor][camera]["sensor dimensions"][res_name]["focal_length"] = (
             extract_single_number(body)
         )
+    else:
+        sensors_data[vendor][camera]["sensor dimensions"][res_name][
+            "focal_length"
+        ] = " "
 
     # Resolution
     category, body = cleanup_block(res_type[3])

@@ -83,9 +83,6 @@
             "diagonal": 1.073
           }
         }
-      },
-      "info": {
-        "other": ""
       }
     },
     "ALEXA Mini2": {
@@ -108,7 +105,7 @@
         }
       },
       "info": {
-        "other": ""
+        "Other": "Here is some good to have information\nAnd a new line with info :)"
       }
     }
   },
@@ -116,7 +113,7 @@
     "ALEXA Mini": {
       "sensor dimensions": {
         "4K UHD": {
-          "focal length": "",
+          "focal length": "50mm",
           "resolution": {
             "width": 3840,
             "height": 2160
@@ -196,9 +193,6 @@
             "diagonal": 1.073
           }
         }
-      },
-      "info": {
-        "other": ""
       }
     },
     "ALEXA Mini2": {
@@ -219,9 +213,6 @@
             "diagonal": 1.073
           }
         }
-      },
-      "info": {
-        "other": ""
       }
     }
   }

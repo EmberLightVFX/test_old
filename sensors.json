@@ -1,87 +1,227 @@
 {
   "ARRI": {
     "ALEXA Mini": {
-      "4K UHD": {
-        "focal length": "",
-        "crop factor": 1.6,
-        "resolution": {
-          "width": 3840,
-          "height": 2160
+      "sensor dimensions": {
+        "4K UHD": {
+          "focal length": "",
+          "resolution": {
+            "width": 3840,
+            "height": 2160
+          },
+          "mm": {
+            "width": 26.4,
+            "height": 14.85,
+            "diagonal": 30.29
+          },
+          "inches": {
+            "width": 1.039,
+            "height": 0.585,
+            "diagonal": 1.1924
+          }
         },
-        "mm": {
-          "width": 26.4,
-          "height": 14.85,
-          "diagonal": 30.29
+        "3.4K Open Gate": {
+          "resolution": {
+            "width": 3424,
+            "height": 2202
+          },
+          "mm": {
+            "width": 28.25,
+            "height": 18.17,
+            "diagonal": 33.589
+          },
+          "inches": {
+            "width": 1.112,
+            "height": 0.715,
+            "diagonal": 1.322
+          }
         },
-        "inch": {
-          "width": 1.039,
-          "height": 0.585,
-          "diagonal": 1.1924
+        "3.2K": {
+          "resolution": {
+            "width": 3200,
+            "height": 1800
+          },
+          "mm": {
+            "width": 26.4,
+            "height": 14.85,
+            "diagonal": 30.29
+          },
+          "inches": {
+            "width": 1.039,
+            "height": 0.585,
+            "diagonal": 1.192
+          }
+        },
+        "2.8K 4:3": {
+          "resolution": {
+            "width": 2880,
+            "height": 2160
+          },
+          "mm": {
+            "width": 23.76,
+            "height": 17.82,
+            "diagonal": 29.7
+          },
+          "inches": {
+            "width": 0.935,
+            "height": 0.702,
+            "diagonal": 1.169
+          }
+        },
+        "2.8K": {
+          "resolution": {
+            "width": 2880,
+            "height": 1620
+          },
+          "mm": {
+            "width": 23.76,
+            "height": 13.37,
+            "diagonal": 27.263
+          },
+          "inches": {
+            "width": 0.935,
+            "height": 0.526,
+            "diagonal": 1.073
+          }
         }
       },
-      "3.4K Open Gate": {
-        "resolution": {
-          "width": 3424.0,
-          "height": 2202.0
-        },
-        "mm": {
-          "width": 28.25,
-          "height": 18.17,
-          "diagonal": 33.589
-        },
-        "inches": {
-          "width": 1.112,
-          "height": 0.715,
-          "diagonal": 1.322
+      "info": {
+        "other": ""
+      }
+    },
+    "ALEXA Mini2": {
+      "sensor dimensions": {
+        "2.8K": {
+          "resolution": {
+            "width": 2880,
+            "height": 1620
+          },
+          "mm": {
+            "width": 23.76,
+            "height": 13.37,
+            "diagonal": 27.263
+          },
+          "inches": {
+            "width": 0.935,
+            "height": 0.526,
+            "diagonal": 1.073
+          }
         }
       },
-      "3.2K": {
-        "resolution": {
-          "width": 3200.0,
-          "height": 1800.0
+      "info": {
+        "other": ""
+      }
+    }
+  },
+  "Canon": {
+    "ALEXA Mini": {
+      "sensor dimensions": {
+        "4K UHD": {
+          "focal length": "",
+          "resolution": {
+            "width": 3840,
+            "height": 2160
+          },
+          "mm": {
+            "width": 26.4,
+            "height": 14.85,
+            "diagonal": 30.29
+          },
+          "inches": {
+            "width": 1.039,
+            "height": 0.585,
+            "diagonal": 1.1924
+          }
         },
-        "mm": {
-          "width": 26.4,
-          "height": 14.85,
-          "diagonal": 30.29
+        "3.4K Open Gate": {
+          "resolution": {
+            "width": 3424,
+            "height": 2202
+          },
+          "mm": {
+            "width": 28.25,
+            "height": 18.17,
+            "diagonal": 33.589
+          },
+          "inches": {
+            "width": 1.112,
+            "height": 0.715,
+            "diagonal": 1.322
+          }
         },
-        "inches": {
-          "width": 1.039,
-          "height": 0.585,
-          "diagonal": 1.192
+        "3.2K": {
+          "resolution": {
+            "width": 3200,
+            "height": 1800
+          },
+          "mm": {
+            "width": 26.4,
+            "height": 14.85,
+            "diagonal": 30.29
+          },
+          "inches": {
+            "width": 1.039,
+            "height": 0.585,
+            "diagonal": 1.192
+          }
+        },
+        "2.8K 4:3": {
+          "resolution": {
+            "width": 2880,
+            "height": 2160
+          },
+          "mm": {
+            "width": 23.76,
+            "height": 17.82,
+            "diagonal": 29.7
+          },
+          "inches": {
+            "width": 0.935,
+            "height": 0.702,
+            "diagonal": 1.169
+          }
+        },
+        "2.8K": {
+          "resolution": {
+            "width": 2880,
+            "height": 1620
+          },
+          "mm": {
+            "width": 23.76,
+            "height": 13.37,
+            "diagonal": 27.263
+          },
+          "inches": {
+            "width": 0.935,
+            "height": 0.526,
+            "diagonal": 1.073
+          }
         }
       },
-      "2.8K 4:3": {
-        "resolution": {
-          "width": 2880.0,
-          "height": 2160.0
-        },
-        "mm": {
-          "width": 23.76,
-          "height": 17.82,
-          "diagonal": 29.7
-        },
-        "inches": {
-          "width": 0.935,
-          "height": 0.702,
-          "diagonal": 1.169
+      "info": {
+        "other": ""
+      }
+    },
+    "ALEXA Mini2": {
+      "sensor dimensions": {
+        "2.8K": {
+          "resolution": {
+            "width": 2880,
+            "height": 1620
+          },
+          "mm": {
+            "width": 23.76,
+            "height": 13.37,
+            "diagonal": 27.263
+          },
+          "inches": {
+            "width": 0.935,
+            "height": 0.526,
+            "diagonal": 1.073
+          }
         }
       },
-      "2.8K": {
-        "resolution": {
-          "width": 2880.0,
-          "height": 1620.0
-        },
-        "mm": {
-          "width": 23.76,
-          "height": 13.37,
-          "diagonal": 27.263
-        },
-        "inches": {
-          "width": 0.935,
-          "height": 0.526,
-          "diagonal": 1.073
-        }
+      "info": {
+        "other": ""
       }
     }
   }

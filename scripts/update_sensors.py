@@ -26,12 +26,15 @@ def cleanup_block(text: str) -> tuple[str, str | None]:
 # Function to extract and convert the first number to a numeric type
 def extract_single_number(text: str) -> float:
     number: list[str] = re.findall(r"\d*\.\d+|\d+", text.replace(",", "."))
-    return float(number[0])
+    return float(number[0]) if "." in number else int(number[0])
 
 
 def extract_dual_numbers(text: str) -> list[float]:
     numbers = re.findall(r"\d*\.\d+|\d+", text.replace(",", "."))
-    return [float(num) for num in numbers[:2]]
+    if "." in numbers:
+        return [float(num) for num in numbers[:2]]
+    else:
+        return [int(num) for num in numbers]
 
 
 # Read existing sensors.json file if it exists
@@ -42,7 +45,6 @@ except FileNotFoundError:
     sensors_data = {}
 
 
-resolutions = []
 vendor = None
 camera = None
 
@@ -64,6 +66,15 @@ camera = body
 if camera not in sensors_data[vendor]:
     sensors_data[vendor][camera] = {}
 
+# Additional Information
+category, body = cleanup_block(camera_info[5])
+if body and "camera" not in sensors_data[vendor][camera]:
+    sensors_data[vendor][camera]["info"] = {}
+    sensors_data[vendor][camera]["info"]["other"] = body
+
+# Sensor Dimensions
+if "sensor dimensions" not in sensors_data[vendor][camera]:
+    sensors_data[vendor][camera]["sensor dimensions"] = {}
 
 ## All resolution types
 for block in blocks[1].split("### Name"):
@@ -79,20 +90,20 @@ for block in blocks[1].split("### Name"):
     if body is None:
         continue
     res_name = body
-    sensors_data[vendor][camera][res_name] = {}
+    sensors_data[vendor][camera]["sensor dimensions"][res_name] = {}
 
     # Focal Length
     category, body = cleanup_block(res_type[2])
     if body:
-        sensors_data[vendor][camera][res_name]["focal_length"] = extract_single_number(
-            body
+        sensors_data[vendor][camera]["sensor dimensions"][res_name]["focal_length"] = (
+            extract_single_number(body)
         )
 
     # Resolution
     category, body = cleanup_block(res_type[3])
     if body:
         res = extract_dual_numbers(body)
-        sensors_data[vendor][camera][res_name]["resolution"] = {
+        sensors_data[vendor][camera]["sensor dimensions"][res_name]["resolution"] = {
             "width": res[0],
             "height": res[1],
         }
@@ -119,12 +130,12 @@ for block in blocks[1].split("### Name"):
     inches[0] = round(inches[0], 3)
     inches[1] = round(inches[1], 3)
 
-    sensors_data[vendor][camera][res_name]["mm"] = {
+    sensors_data[vendor][camera]["sensor dimensions"][res_name]["mm"] = {
         "width": mm[0],
         "height": mm[1],
         "diagonal": round(math.sqrt(mm[0] ** 2 + mm[1] ** 2), 3),
     }
-    sensors_data[vendor][camera][res_name]["inches"] = {
+    sensors_data[vendor][camera]["sensor dimensions"][res_name]["inches"] = {
         "width": inches[0],
         "height": inches[1],
         "diagonal": round(math.sqrt(inches[0] ** 2 + inches[1] ** 2), 3),

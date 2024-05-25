@@ -79,7 +79,7 @@ for vendor, cameras in sensors.items():
             
         markdown_content = generate_markdown(vendor, camera, data.get("info", None), entries)
 
-        with open(filepath, "w") as md_file:
+        with open(os.path.join(docs_folder, filepath), "w") as md_file:
             md_file.write(markdown_content)
 
     nav_entries.append({"vendor": vendor, "nav_cam": nav_cam})

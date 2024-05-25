@@ -114,7 +114,10 @@ for block in blocks[1].split("### Name"):
             "height": res[1],
         }
     else:
-        sensors_data[vendor][camera]["sensor dimensions"][dim_name]["resolution"] = {}
+        sensors_data[vendor][camera]["sensor dimensions"][dim_name]["resolution"] = {
+            "width": "",
+            "height": "",
+        }
 
     # Sensor Size (mm)
     category, data = cleanup_block(dim_type[4])

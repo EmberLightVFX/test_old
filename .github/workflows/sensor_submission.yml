@@ -88,7 +88,6 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const issueNumber = ${{ github.event.issue.number }};
             const errors = [];
             if ("${{ steps.python.outcome }}" == "failure") {
               errors.push('Error in update_sensors.py:\n${{ steps.python.conclusion }}\n-------------------------');
@@ -107,6 +106,6 @@ jobs:
             github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              issue_number: issueNumber,
+              issue_number: ${{ github.event.issue.number }},
               body: commentBody
             });

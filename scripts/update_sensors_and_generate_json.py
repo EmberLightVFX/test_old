@@ -1,4 +1,5 @@
 import math
+import os
 import re
 import sys
 import json
@@ -12,6 +13,9 @@ if DEBUG:
 
 else:
     BODY = sys.argv[1]
+
+data_folder = os.path.join(".", "data")
+json_file_path = os.path.join(data_folder, "sensors.json")
 
 
 def cleanup_block(text: str) -> tuple[str, str | None]:
@@ -39,7 +43,7 @@ def extract_dual_numbers(text: str) -> list[float]:
 
 # Read existing sensors.json file if it exists
 try:
-    with open("sensors.json", "r") as f:
+    with open(json_file_path, "r") as f:
         sensors_data = json.load(f)
 except FileNotFoundError:
     sensors_data = {}
@@ -148,5 +152,5 @@ for block in blocks[1].split("### Name"):
 if DEBUG:
     pprint(sensors_data)
 else:
-    with open("sensors.json", "w") as f:
+    with open(json_file_path, "w") as f:
         json.dump(sensors_data, f, indent=2)

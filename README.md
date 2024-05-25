@@ -12,12 +12,8 @@ You find them all in the data folder.
 
 - json
 - csv
+- yaml
 - markdown
-
-## API
-
-You can access the data through this API:
-(Coming soon)
 
 ## Sensor Data Missing?
 

@@ -100,7 +100,7 @@ jobs:
           script: |
             const errors = [];
             if ("${{ steps.python.outcome }}" == "failure") {
-              errors.push('Error happened in update_sensors.py');
+              errors.push('Error happened in update_sensors_and_generate_json.py');
             }
             if ("${{ steps.csv.outcome }}" == "failure") {
               errors.push('Error happened in generate_csv.py');

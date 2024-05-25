@@ -35,7 +35,7 @@ def extract_single_number(text: str) -> float:
 
 def extract_dual_numbers(text: str) -> list[float]:
     numbers = re.findall(r"\d*\.\d+|\d+", text.replace(",", "."))
-    if "." in numbers:
+    if any("." in value for value in numbers):
         return [float(num) for num in numbers[:2]]
     else:
         return [int(num) for num in numbers]

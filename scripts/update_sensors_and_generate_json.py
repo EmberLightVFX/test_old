@@ -83,40 +83,40 @@ for block in blocks[1].split("### Name"):
     # Add back the name category that got removed from the split
     block = f"### Name{block}"
 
-    res_type = block.strip().split("### ")
+    dim_type = block.strip().split("### ")
 
     # Name
-    category, data = cleanup_block(res_type[1])
+    category, data = cleanup_block(dim_type[1])
     if data is None:
         continue
-    res_name = data
-    sensors_data[vendor][camera]["sensor dimensions"][res_name] = {}
+    dim_name = data
+    sensors_data[vendor][camera]["sensor dimensions"][dim_name] = {}
 
     # Focal Length
-    category, data = cleanup_block(res_type[2])
+    category, data = cleanup_block(dim_type[2])
     if data:
-        sensors_data[vendor][camera]["sensor dimensions"][res_name]["focal_length"] = (
+        sensors_data[vendor][camera]["sensor dimensions"][dim_name]["focal_length"] = (
             extract_single_number(data)
         )
     else:
-        sensors_data[vendor][camera]["sensor dimensions"][res_name]["focal_length"] = ""
+        sensors_data[vendor][camera]["sensor dimensions"][dim_name]["focal_length"] = ""
 
     # Resolution
-    category, data = cleanup_block(res_type[3])
+    category, data = cleanup_block(dim_type[3])
     if data:
         res = extract_dual_numbers(data)
-        sensors_data[vendor][camera]["sensor dimensions"][res_name]["resolution"] = {
+        sensors_data[vendor][camera]["sensor dimensions"][dim_name]["resolution"] = {
             "width": res[0],
             "height": res[1],
         }
 
     # Sensor Size (mm)
-    category, data = cleanup_block(res_type[4])
+    category, data = cleanup_block(dim_type[4])
     if data:
         mm = extract_dual_numbers(data)
 
     # Sensor Size (inches)
-    category, data = cleanup_block(res_type[5])
+    category, data = cleanup_block(dim_type[5])
     if data:
         inches = extract_dual_numbers(data)
 
@@ -132,12 +132,12 @@ for block in blocks[1].split("### Name"):
     inches[0] = round(inches[0], 3)
     inches[1] = round(inches[1], 3)
 
-    sensors_data[vendor][camera]["sensor dimensions"][res_name]["mm"] = {
+    sensors_data[vendor][camera]["sensor dimensions"][dim_name]["mm"] = {
         "width": mm[0],
         "height": mm[1],
         "diagonal": round(math.sqrt(mm[0] ** 2 + mm[1] ** 2), 3),
     }
-    sensors_data[vendor][camera]["sensor dimensions"][res_name]["inches"] = {
+    sensors_data[vendor][camera]["sensor dimensions"][dim_name]["inches"] = {
         "width": inches[0],
         "height": inches[1],
         "diagonal": round(math.sqrt(inches[0] ** 2 + inches[1] ** 2), 3),

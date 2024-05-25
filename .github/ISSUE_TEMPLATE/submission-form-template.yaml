@@ -71,8 +71,8 @@ body:
   - type: markdown
     attributes:
       value: |
-        # Resolution types
-        Below you'll find 10 available resolution types you can fill out.
+        # Sensor dimensions
+        Below you'll find 10 available sensor dimensions fields you can fill out.
         :red_circle: Type name and ether mm or inches needs to filled out or else the information isn't valid.
         If the sensor size doesn't change per resolution, name the resolution type `All` and skip entering any resolution
 
@@ -82,16 +82,16 @@ body:
 
         You can ether resolution and sensor size (mm and inches) any way you want. Only the two first values found will be processed.
 
-  #### Resolution 1
+  #### Dimensions 1
   - type: markdown
     attributes:
-      value: "## Resolution 1"
+      value: "## Dimensions 1"
 
   - type: input
     id: name-r1
     attributes:
       label: Name
-      description: ":red_circle: What's the resolution type's name?"
+      description: ":red_circle: What's the sensor dimension's name?"
       value: All
     validations:
       required: true
@@ -124,16 +124,16 @@ body:
       description: ":red_circle: Enter at least one of mm or inches"
       placeholder: 0.968 in x 0.543 in
 
-  #### Resolution 2
+  #### Dimensions 2
   - type: markdown
     attributes:
-      value: "## Resolution 2"
+      value: "## Dimensions 2"
 
   - type: input
     id: name-r2
     attributes:
       label: Name
-      description: ":red_circle: What's the resolution type's name?"
+      description: ":red_circle: What's the sensor dimension's name?"
       placeholder: "2K Anamorphic 2.39:1"
 
   - type: input
@@ -164,16 +164,16 @@ body:
       description: ":red_circle: Enter at least one of mm or inches"
       placeholder: 0.968 in x 0.543 in
 
-  #### Resolution 3
+  #### Dimensions 3
   - type: markdown
     attributes:
-      value: "## Resolution 3"
+      value: "## Dimensions 3"
 
   - type: input
     id: name-r3
     attributes:
       label: Name
-      description: ":red_circle: What's the resolution type's name?"
+      description: ":red_circle: What's the sensor dimension's name?"
       placeholder: "2K Anamorphic 2.39:1"
 
   - type: input
@@ -204,16 +204,16 @@ body:
       description: ":red_circle: Enter at least one of mm or inches"
       placeholder: 0.968 in x 0.543 in
 
-  #### Resolution 4
+  #### Dimensions 4
   - type: markdown
     attributes:
-      value: "## Resolution 4"
+      value: "## Dimensions 4"
 
   - type: input
     id: name-r4
     attributes:
       label: Name
-      description: ":red_circle: What's the resolution type's name?"
+      description: ":red_circle: What's the sensor dimension's name?"
       placeholder: "2K Anamorphic 2.39:1"
 
   - type: input
@@ -244,16 +244,16 @@ body:
       description: ":red_circle: Enter at least one of mm or inches"
       placeholder: 0.968 in x 0.543 in
 
-  #### Resolution 5
+  #### Dimensions 5
   - type: markdown
     attributes:
-      value: "## Resolution 5"
+      value: "## Dimensions 5"
 
   - type: input
     id: name-r5
     attributes:
       label: Name
-      description: ":red_circle: What's the resolution type's name?"
+      description: ":red_circle: What's the sensor dimension's name?"
       placeholder: "2K Anamorphic 2.39:1"
 
   - type: input
@@ -284,16 +284,16 @@ body:
       description: ":red_circle: Enter at least one of mm or inches"
       placeholder: 0.968 in x 0.543 in
 
-  #### Resolution 6
+  #### Dimensions 6
   - type: markdown
     attributes:
-      value: "## Resolution 6"
+      value: "## Dimensions 6"
 
   - type: input
     id: name-r6
     attributes:
       label: Name
-      description: ":red_circle: What's the resolution type's name?"
+      description: ":red_circle: What's the sensor dimension's name?"
       placeholder: "2K Anamorphic 2.39:1"
 
   - type: input
@@ -324,16 +324,16 @@ body:
       description: ":red_circle: Enter at least one of mm or inches"
       placeholder: 0.968 in x 0.543 in
 
-  #### Resolution 7
+  #### Dimensions 7
   - type: markdown
     attributes:
-      value: "## Resolution 7"
+      value: "## Dimensions 7"
 
   - type: input
     id: name-r7
     attributes:
       label: Name
-      description: ":red_circle: What's the resolution type's name?"
+      description: ":red_circle: What's the sensor dimension's name?"
       placeholder: "2K Anamorphic 2.39:1"
 
   - type: input
@@ -364,16 +364,16 @@ body:
       description: ":red_circle: Enter at least one of mm or inches"
       placeholder: 0.968 in x 0.543 in
 
-  #### Resolution 8
+  #### Dimensions 8
   - type: markdown
     attributes:
-      value: "## Resolution 8"
+      value: "## Dimensions 8"
 
   - type: input
     id: name-r8
     attributes:
       label: Name
-      description: ":red_circle: What's the resolution type's name?"
+      description: ":red_circle: What's the sensor dimension's name?"
       placeholder: "2K Anamorphic 2.39:1"
 
   - type: input
@@ -404,16 +404,16 @@ body:
       description: ":red_circle: Enter at least one of mm or inches"
       placeholder: 0.968 in x 0.543 in
 
-  #### Resolution 9
+  #### Dimensions 9
   - type: markdown
     attributes:
-      value: "## Resolution 9"
+      value: "## Dimensions 9"
 
   - type: input
     id: name-r9
     attributes:
       label: Name
-      description: ":red_circle: What's the resolution type's name?"
+      description: ":red_circle: What's the sensor dimension's name?"
       placeholder: "2K Anamorphic 2.39:1"
 
   - type: input
@@ -444,16 +444,16 @@ body:
       description: ":red_circle: Enter at least one of mm or inches"
       placeholder: 0.968 in x 0.543 in
 
-  #### Resolution 10
+  #### Dimensions 10
   - type: markdown
     attributes:
-      value: "## Resolution 10"
+      value: "## Dimensions 10"
 
   - type: input
     id: name-r10
     attributes:
       label: Name
-      description: ":red_circle: What's the resolution type's name?"
+      description: ":red_circle: What's the sensor dimension's name?"
       placeholder: "2K Anamorphic 2.39:1"
 
   - type: input

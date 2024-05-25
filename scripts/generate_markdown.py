@@ -55,14 +55,14 @@ for vendor, cameras in sensors.items():
             ["Name", "Focal Length", "Resolution", "Sensor mm", "Sensor inches"],
         ]
 
-        for res_type, res_data in data["sensor dimensions"].items():
+        for dim_type, dim_data in data["sensor dimensions"].items():
             entries.append([])
             i = len(entries) - 1
-            entries[i].append(res_type)
-            entries[i].append(res_data.get("focal length"))
-            entries[i].append(f"{res_data["resolution"]["width"]} x {res_data["resolution"]["height"]}")
-            entries[i].append(f"{res_data["mm"]["width"]} x {res_data["mm"]["height"]} ({res_data["mm"]["diagonal"]} diagonal)")
-            entries[i].append(f"{res_data["inches"]["width"]} x {res_data["inches"]["height"]} ({res_data["inches"]["diagonal"]} diagonal)")
+            entries[i].append(dim_type)
+            entries[i].append(dim_data.get("focal length"))
+            entries[i].append(f"{dim_data["resolution"]["width"]} x {dim_data["resolution"]["height"]}")
+            entries[i].append(f"{dim_data["mm"]["width"]} x {dim_data["mm"]["height"]} ({dim_data["mm"]["diagonal"]} diagonal)")
+            entries[i].append(f"{dim_data["inches"]["width"]} x {dim_data["inches"]["height"]} ({dim_data["inches"]["diagonal"]} diagonal)")
 
         # Check if there are any focal length in the entry
         found_fl = any(entry[1] for entry in entries[1:])

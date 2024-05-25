@@ -39,21 +39,21 @@ with open(
     # Iterate through the JSON data to generate csv info
     for vendor, cameras in sensors.items():
         for camera, data in cameras.items():
-            for res_type, res_data in data["sensor dimensions"].items():
+            for dim_type, dim_data in data["sensor dimensions"].items():
                 csv_writer.writerow(
                     [
                         vendor,
                         camera,
-                        res_type,
-                        res_data["focal length"],
-                        res_data["resolution"]["width"],
-                        res_data["resolution"]["height"],
-                        res_data["mm"]["width"],
-                        res_data["mm"]["height"],
-                        res_data["mm"]["diagonal"],
-                        res_data["inches"]["width"],
-                        res_data["inches"]["height"],
-                        res_data["inches"]["diagonal"],
+                        dim_type,
+                        dim_data["focal length"],
+                        dim_data["resolution"]["width"],
+                        dim_data["resolution"]["height"],
+                        dim_data["mm"]["width"],
+                        dim_data["mm"]["height"],
+                        dim_data["mm"]["diagonal"],
+                        dim_data["inches"]["width"],
+                        dim_data["inches"]["height"],
+                        dim_data["inches"]["diagonal"],
                         data["info"].get("Other", ""),
                     ]
                 )

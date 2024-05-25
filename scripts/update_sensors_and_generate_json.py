@@ -17,10 +17,10 @@ else:
 def cleanup_block(text: str) -> tuple[str, str | None]:
     lines = text.splitlines()
     category = str(lines[0].strip())
-    body = None
+    data = None
     if str(lines[2].strip()) != "_No response_":
-        body = "\n".join(lines[2:]).strip()
-    return (category, body)
+        data = "\n".join(lines[2:]).strip()
+    return (category, data)
 
 
 # Function to extract and convert the first number to a numeric type
@@ -53,24 +53,24 @@ blocks = BODY.strip().split("### Name", 1)
 camera_info = blocks[0].strip().split("### ")
 
 # Vendor
-category, body = cleanup_block(camera_info[2])
-if body == "Other":
-    category, body = cleanup_block(camera_info[3])
-vendor = body
+category, data = cleanup_block(camera_info[2])
+if data == "Other":
+    category, data = cleanup_block(camera_info[3])
+vendor = data
 if vendor not in sensors_data:
     sensors_data[vendor] = {}
 
 # Camera
-category, body = cleanup_block(camera_info[4])
-camera = body
+category, data = cleanup_block(camera_info[4])
+camera = data
 if camera not in sensors_data[vendor]:
     sensors_data[vendor][camera] = {}
 
 # Additional Information
-category, body = cleanup_block(camera_info[5])
-if body and "camera" not in sensors_data[vendor][camera]:
-    sensors_data[vendor][camera]["info"] = {}
-    sensors_data[vendor][camera]["info"]["Other"] = body
+category, data = cleanup_block(camera_info[5])
+sensors_data[vendor][camera]["info"] = {}
+if data:
+    sensors_data[vendor][camera]["info"]["Other"] = data
 
 # Sensor Dimensions
 if "sensor dimensions" not in sensors_data[vendor][camera]:
@@ -86,41 +86,39 @@ for block in blocks[1].split("### Name"):
     res_type = block.strip().split("### ")
 
     # Name
-    category, body = cleanup_block(res_type[1])
-    if body is None:
+    category, data = cleanup_block(res_type[1])
+    if data is None:
         continue
-    res_name = body
+    res_name = data
     sensors_data[vendor][camera]["sensor dimensions"][res_name] = {}
 
     # Focal Length
-    category, body = cleanup_block(res_type[2])
-    if body:
+    category, data = cleanup_block(res_type[2])
+    if data:
         sensors_data[vendor][camera]["sensor dimensions"][res_name]["focal_length"] = (
-            extract_single_number(body)
+            extract_single_number(data)
         )
     else:
-        sensors_data[vendor][camera]["sensor dimensions"][res_name][
-            "focal_length"
-        ] = " "
+        sensors_data[vendor][camera]["sensor dimensions"][res_name]["focal_length"] = ""
 
     # Resolution
-    category, body = cleanup_block(res_type[3])
-    if body:
-        res = extract_dual_numbers(body)
+    category, data = cleanup_block(res_type[3])
+    if data:
+        res = extract_dual_numbers(data)
         sensors_data[vendor][camera]["sensor dimensions"][res_name]["resolution"] = {
             "width": res[0],
             "height": res[1],
         }
 
     # Sensor Size (mm)
-    category, body = cleanup_block(res_type[4])
-    if body:
-        mm = extract_dual_numbers(body)
+    category, data = cleanup_block(res_type[4])
+    if data:
+        mm = extract_dual_numbers(data)
 
     # Sensor Size (inches)
-    category, body = cleanup_block(res_type[5])
-    if body:
-        inches = extract_dual_numbers(body)
+    category, data = cleanup_block(res_type[5])
+    if data:
+        inches = extract_dual_numbers(data)
 
     if not mm and not inches:
         raise AttributeError("You need at least one sensor size")

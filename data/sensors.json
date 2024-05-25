@@ -20,6 +20,7 @@
           }
         },
         "3.4K Open Gate": {
+          "focal length": "",
           "resolution": {
             "width": 3424,
             "height": 2202
@@ -36,6 +37,7 @@
           }
         },
         "3.2K": {
+          "focal length": "",
           "resolution": {
             "width": 3200,
             "height": 1800
@@ -52,6 +54,7 @@
           }
         },
         "2.8K 4:3": {
+          "focal length": "",
           "resolution": {
             "width": 2880,
             "height": 2160
@@ -68,6 +71,7 @@
           }
         },
         "2.8K": {
+          "focal length": "",
           "resolution": {
             "width": 2880,
             "height": 1620
@@ -83,11 +87,13 @@
             "diagonal": 1.073
           }
         }
-      }
+      },
+      "info": {}
     },
     "ALEXA Mini2": {
       "sensor dimensions": {
         "2.8K": {
+          "focal length": "",
           "resolution": {
             "width": 2880,
             "height": 1620
@@ -130,6 +136,7 @@
           }
         },
         "3.4K Open Gate": {
+          "focal length": "",
           "resolution": {
             "width": 3424,
             "height": 2202
@@ -146,6 +153,7 @@
           }
         },
         "3.2K": {
+          "focal length": "",
           "resolution": {
             "width": 3200,
             "height": 1800
@@ -162,6 +170,7 @@
           }
         },
         "2.8K 4:3": {
+          "focal length": "",
           "resolution": {
             "width": 2880,
             "height": 2160
@@ -178,6 +187,7 @@
           }
         },
         "2.8K": {
+          "focal length": "",
           "resolution": {
             "width": 2880,
             "height": 1620
@@ -193,11 +203,13 @@
             "diagonal": 1.073
           }
         }
-      }
+      },
+      "info": {}
     },
     "ALEXA Mini2": {
       "sensor dimensions": {
         "2.8K": {
+          "focal length": "",
           "resolution": {
             "width": 2880,
             "height": 1620
@@ -213,7 +225,8 @@
             "diagonal": 1.073
           }
         }
-      }
+      },
+      "info": {}
     }
   }
 }

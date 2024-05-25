@@ -8,6 +8,7 @@ body:
     attributes:
       value: |
         Thanks for taking the time to make the database better!
+        After creating this issue a PR will automatically be created with all files generated.
 
   - type: textarea
     id: references
@@ -33,9 +34,14 @@ body:
         - ARRI
         - Blackmagic Design
         - Canon
+        - DJI
+        - GoPro
+        - Insta360
+        - Kinefinity
         - Panasonic
         - RED
         - Sony
+        - Z Cam
         - Other
     validations:
       required: true

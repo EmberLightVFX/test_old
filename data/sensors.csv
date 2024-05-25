@@ -1,0 +1,14 @@
+Vendor,Camera,Sensor Dimensions Name,Focal Length,Resolution Width,Resolution Height,Sensor mm Width,Sensor mm Height,Sensor mm Diagonal,Sensor Inches Width,Sensor Inches Height,Sensor Inches Diagonal,Info
+ARRI,ALEXA Mini,4K UHD,,3840,2160,26.4,14.85,30.29,1.039,0.585,1.1924,
+ARRI,ALEXA Mini,3.4K Open Gate,,3424,2202,28.25,18.17,33.589,1.112,0.715,1.322,
+ARRI,ALEXA Mini,3.2K,,3200,1800,26.4,14.85,30.29,1.039,0.585,1.192,
+ARRI,ALEXA Mini,2.8K 4:3,,2880,2160,23.76,17.82,29.7,0.935,0.702,1.169,
+ARRI,ALEXA Mini,2.8K,,2880,1620,23.76,13.37,27.263,0.935,0.526,1.073,
+ARRI,ALEXA Mini2,2.8K,,2880,1620,23.76,13.37,27.263,0.935,0.526,1.073,"Here is some good to have information
+And a new line with info :)"
+Canon,ALEXA Mini,4K UHD,50mm,3840,2160,26.4,14.85,30.29,1.039,0.585,1.1924,
+Canon,ALEXA Mini,3.4K Open Gate,,3424,2202,28.25,18.17,33.589,1.112,0.715,1.322,
+Canon,ALEXA Mini,3.2K,,3200,1800,26.4,14.85,30.29,1.039,0.585,1.192,
+Canon,ALEXA Mini,2.8K 4:3,,2880,2160,23.76,17.82,29.7,0.935,0.702,1.169,
+Canon,ALEXA Mini,2.8K,,2880,1620,23.76,13.37,27.263,0.935,0.526,1.073,
+Canon,ALEXA Mini2,2.8K,,2880,1620,23.76,13.37,27.263,0.935,0.526,1.073,

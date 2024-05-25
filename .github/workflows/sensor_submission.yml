@@ -82,7 +82,7 @@ jobs:
 
             ${{ github.event.issue.body }}
 
-      - name: Comment on Issue if Python scripts fail
+      - name: Comment on Issue if all succeeded
         uses: actions/github-script@v7
         with:
           script: |

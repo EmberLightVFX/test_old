@@ -19,7 +19,7 @@ def create_filename(name: str) -> str:
     return re.sub(r'[^a-zA-Z0-9]', '', name.lower().replace(" ", "_"))
 
 def create_markdown_table(res: list[list[str]]) -> str:
-    return tabulate(tabular_data=res[1:], headers=res[0], tablefmt='github')
+    return tabulate(tabular_data=res[1:], headers=res[0], tablefmt='github') + "\n"
 
 
 def generate_markdown(vendor: str, camera: str, info: dict[str, str] | None , res: list[list[str]]):
@@ -50,7 +50,7 @@ for vendor, cameras in sensors.items():
     for camera, data in cameras.items():
         filename = f"{create_filename(camera)}.md"
         filepath = os.path.join(vendor_path_name, filename)
-        nav_cam.append({"name": camera, "filepath": filepath.replace("\\", "/")})
+        nav_cam.append({"name": camera, "filepath": f"/{filepath.replace('\\', '/')}"})
 
         entries: list[list[str]] = [
             ["Name", "Focal Length", "Resolution", "Sensor mm", "Sensor inches"],
@@ -66,7 +66,7 @@ for vendor, cameras in sensors.items():
             entries[i].append(f"{dim_data["inches"]["width"]} x {dim_data["inches"]["height"]} ({dim_data["inches"]["diagonal"]} diagonal)")
 
         # Check if there are any resolutions in the entry
-        found_data = any(entry[2] for entry in entries[1:])
+        found_data = all(entry[2] == "x" for entry in entries[1:])
         if not found_data:
             for entry in entries:
                 entry.pop(2)

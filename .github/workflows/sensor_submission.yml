@@ -90,18 +90,7 @@ jobs:
           github-token: ${{ secrets.PAT }}
           script: |
             const errors = [];
-            if ("${{ steps.python.outcome }}" == "failure") {
-              errors.push('Error in update_sensors.py:\n${{ steps.python.outputs }}\n-------------------------');
-            }
-            if ("${{ steps.csv.outcome }}" == "failure") {
-              errors.push('Error in generate_csv.py:\n${{ steps.csv.outputs }}\n-------------------------');
-            }
-            if ("${{ steps.yaml.outcome }}" == "failure") {
-              errors.push('Error in generate_yaml.py:\n${{ steps.yaml.outputs }}\n-------------------------');
-            }
-            if ("${{ steps.markdown.outcome }}" == "failure") {
-              errors.push('Error in generate_markdown.py:\n${{ steps.markdown.outputs }}\n-------------------------');
-            }
+
             const commentBody = 'There was an error processing the sensor data:\n\n${errors.join('\n\n')}';
 
             github.rest.issues.createComment({

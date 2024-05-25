@@ -7,7 +7,7 @@ from tabulate import tabulate
 data_folder = os.path.join(".", "data")
 json_file_path = os.path.join(data_folder, "sensors.json")
 docs_folder = os.path.join(data_folder, "markdown")
-sidebar_file_path = os.path.join(docs_folder, "_sidebar.md")
+sidebar_file_path = os.path.join(docs_folder, "list.md")
 
 with open(json_file_path, "r") as file:
     sensors: dict[str, dict[str, dict[str, Any]]] = json.load(file)

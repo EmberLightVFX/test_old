@@ -41,6 +41,7 @@ jobs:
           cache: 'pip'
 
       - name: Process and update JSON with Python
+        continue-on-error: true
         run: |
           pip install -r ./scripts/requirements.txt
           python3 ./scripts/update_sensors_and_generatee_json.py "${{ github.event.issue.body }}"
@@ -52,16 +53,7 @@ jobs:
             fi
 
       - name: Generate csv
-        run: |
-          python3 scripts/generate_csv.py
-          if [ $? -ne 0 ]; then
-            echo "generate_csv_error<<EOF" >> $GITHUB_ENV
-              cat $ERROR_FILE >> $GITHUB_ENV
-              echo "EOF" >> $GITHUB_ENV
-              exit 1
-            fi
-
-      - name: Generate csv
+        continue-on-error: true
         run: |
           python3 scripts/generate_csv.py
           if [ $? -ne 0 ]; then
@@ -72,6 +64,7 @@ jobs:
             fi
 
       - name: Generate yaml
+        continue-on-error: true
         run: |
           python3 scripts/generate_yaml.py
           if [ $? -ne 0 ]; then
@@ -82,6 +75,7 @@ jobs:
             fi
 
       - name: Generate markdown/documentation
+        continue-on-error: true
         run: |
           python3 scripts/generate_markdown.py
           if [ $? -ne 0 ]; then

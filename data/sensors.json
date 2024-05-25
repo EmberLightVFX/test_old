@@ -113,6 +113,28 @@
       "info": {
         "Other": "Here is some good to have information\nAnd a new line with info :)"
       }
+    },
+    "1": {
+      "info": {},
+      "sensor dimensions": {
+        "All": {
+          "focal length": "",
+          "resolution": {
+            "width": "",
+            "height": ""
+          },
+          "mm": {
+            "width": 7,
+            "height": 7,
+            "diagonal": 9.899
+          },
+          "inches": {
+            "width": 0.935,
+            "height": 0.702,
+            "diagonal": 1.169
+          }
+        }
+      }
     }
   },
   "Canon": {

@@ -119,21 +119,21 @@ jobs:
         with:
           script: |
             const issueNumber = ${{ github.event.issue.number }};
-            const test = ${{ env.update_json_error }};
+            const test = '${{ env.update_json_error }}';
             const errors = [];
             if (process.env.update_json_error) {
-              errors.push(`Error in update_sensors.py:\n${process.env.update_json_error}`);
+              errors.push('Error in update_sensors.py:\n${process.env.update_json_error}');
             }
             if (process.env.generate_csv_error) {
-              errors.push(`Error in generate_csv.py:\n${process.env.generate_csv_error}`);
+              errors.push('Error in generate_csv.py:\n${process.env.generate_csv_error}');
             }
             if (process.env.generate_yaml_error) {
-              errors.push(`Error in generate_yaml.py:\n${process.env.generate_yaml_error}`);
+              errors.push('Error in generate_yaml.py:\n${process.env.generate_yaml_error}');
             }
             if (process.env.generate_markdown_error) {
-              errors.push(`Error in generate_markdown.py:\n${process.env.generate_markdown_error}`);
+              errors.push('Error in generate_markdown.py:\n${process.env.generate_markdown_error}');
             }
-            const commentBody = `There was an error processing the sensor data:\n\n${errors.join('\n\n')}`;
+            const commentBody = 'There was an error processing the sensor data:\n\n${errors.join('\n\n')}';
 
             github.rest.issues.createComment({
               owner: context.repo.owner,

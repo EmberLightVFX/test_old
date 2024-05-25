@@ -1,7 +1,7 @@
-- [ARRI456](//)
+- [ARRI](//)
   - [ALEXA Mini](/arri/alexamini.md)
   - [ALEXA Mini2](/arri/alexamini2.md)
 
-- [Canon456](//)
+- [Canon](//)
   - [ALEXA Mini](/canon/alexamini.md)
   - [ALEXA Mini2](/canon/alexamini2.md)

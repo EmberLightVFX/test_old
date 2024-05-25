@@ -43,12 +43,13 @@ nav_entries = []
 
 # Iterate through the JSON data to generate markdown files
 for vendor, cameras in sensors.items():
-    vendor_dir = os.path.join(docs_folder, create_filename(vendor))
+    vendor_path_name = create_filename(vendor)
+    vendor_dir = os.path.join(docs_folder, vendor_path_name)
     os.makedirs(vendor_dir, exist_ok=True)
     nav_cam:list[dict[str, str]] = []
     for camera, data in cameras.items():
         filename = f"{create_filename(camera)}.md"
-        filepath = os.path.join(vendor_dir, filename)
+        filepath = os.path.join(vendor_path_name, filename)
         nav_cam.append({"name": camera, "filepath": filepath.replace("\\", "/")})
 
         entries: list[list[str]] = [

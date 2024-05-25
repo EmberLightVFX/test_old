@@ -44,7 +44,7 @@ jobs:
         continue-on-error: true
         run: |
           pip install -r ./scripts/requirements.txt
-          python3 scripts/update_sensors.py "${{ github.event.issue.body }}"
+          python3 ./scripts/update_sensors_and_generatee_json.py "${{ github.event.issue.body }}"
           if [ $? -ne 0 ]; then
             echo "update_json_error<<EOF" >> $GITHUB_ENV
               cat $ERROR_FILE >> $GITHUB_ENV
@@ -53,7 +53,6 @@ jobs:
             fi
 
       - name: Generate csv
-        if: success()
         continue-on-error: true
         run: |
           python3 scripts/generate_csv.py
@@ -65,7 +64,6 @@ jobs:
             fi
 
       - name: Generate csv
-        if: success()
         continue-on-error: true
         run: |
           python3 scripts/generate_csv.py
@@ -77,7 +75,6 @@ jobs:
             fi
 
       - name: Generate yaml
-        if: success()
         continue-on-error: true
         run: |
           python3 scripts/generate_yaml.py
@@ -89,7 +86,6 @@ jobs:
             fi
 
       - name: Generate markdown/documentation
-        if: success()
         continue-on-error: true
         run: |
           python3 scripts/generate_markdown.py
@@ -101,14 +97,12 @@ jobs:
           fi
 
       - name: Create a safe branch name
-        if: success()
         run: |
           name=$(echo '${{ github.event.issue.title }}' | tr ' ' '_' | tr -cd '[:alnum:]_')
           echo "branch_name=${name}" >> $GITHUB_ENV
 
 
       - name: Create Pull Request
-        if: success()
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.PAT }}
@@ -126,7 +120,7 @@ jobs:
 
 
       - name: Comment on Issue if Python scripts fail
-        if: failure()
+        if: ${{ failure() }}
         uses: actions/github-script@v6
         with:
           script: |

@@ -10,7 +10,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Extract issue details
         id: info
@@ -35,23 +35,56 @@ jobs:
           echo "Camera: ${{ env.camera }}"
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: '3.12'
+          cache: 'pip'
 
       - name: Process and update JSON with Python
+        continue-on-error: true
         run: |
-          # Call the Python script to update sensors.json
+          pip install -r ./scripts/requirements.txt
           python3 scripts/update_sensors.py "${{ github.event.issue.body }}"
+          if [ $? -ne 0 ]; then
+            echo "update_json_error<<EOF" >> $GITHUB_ENV
+              cat $ERROR_FILE >> $GITHUB_ENV
+              echo "EOF" >> $GITHUB_ENV
+              exit 1
+            fi
 
+      - name: Generate csv
+        if: success()
+        continue-on-error: true
+        run: |
+          python3 scripts/generate_csv.py
+          if [ $? -ne 0 ]; then
+            echo "generate_csv_error<<EOF" >> $GITHUB_ENV
+              cat $ERROR_FILE >> $GITHUB_ENV
+              echo "EOF" >> $GITHUB_ENV
+              exit 1
+            fi
+
+      - name: Generate markdown/documentation
+        if: success()
+        continue-on-error: true
+        run: |
+          python3 scripts/generate_markdown.py
+          if [ $? -ne 0 ]; then
+            echo "generate_markdown_error<<EOF" >> $GITHUB_ENV
+            cat $ERROR_FILE >> $GITHUB_ENV
+            echo "EOF" >> $GITHUB_ENV
+            exit 1
+          fi
 
       - name: Create a safe branch name
+        if: success()
         run: |
           name=$(echo '${{ github.event.issue.title }}' | tr ' ' '_' | tr -cd '[:alnum:]_')
           echo "branch_name=${name}" >> $GITHUB_ENV
 
 
       - name: Create Pull Request
+        if: success()
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.PAT }}
@@ -66,3 +99,29 @@ jobs:
             Closes #${{ github.event.issue.number }}
 
             ${{ github.event.issue.body }}
+
+
+      - name: Comment on Issue if Python scripts fail
+        if: failure()
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const issueNumber = ${{ github.event.issue.number }};
+            const errors = [];
+            if (process.env.update_json_error) {
+              errors.push(`Error in update_sensors.py:\n${process.env.update_json_error}`);
+            }
+            if (process.env.generate_csv_error) {
+              errors.push(`Error in generate_csv.py:\n${process.env.generate_csv_error}`);
+            }
+            if (process.env.generate_markdown_error) {
+              errors.push(`Error in generate_markdown.py:\n${process.env.generate_markdown_error}`);
+            }
+            const commentBody = `There was an error processing the sensor data:\n\n${errors.join('\n\n')}`;
+
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber,
+              body: commentBody
+            });

@@ -99,11 +99,11 @@ for block in blocks[1].split("### Name"):
     # Focal Length
     category, data = cleanup_block(dim_type[2])
     if data:
-        sensors_data[vendor][camera]["sensor dimensions"][dim_name]["focal_length"] = (
+        sensors_data[vendor][camera]["sensor dimensions"][dim_name]["focal length"] = (
             extract_single_number(data)
         )
     else:
-        sensors_data[vendor][camera]["sensor dimensions"][dim_name]["focal_length"] = ""
+        sensors_data[vendor][camera]["sensor dimensions"][dim_name]["focal length"] = ""
 
     # Resolution
     category, data = cleanup_block(dim_type[3])

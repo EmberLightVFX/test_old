@@ -9,22 +9,22 @@ To quickly view the data, go to docs page:
 
 ```cmd
 Vendor
-└───Camera
-    ├───Info
-    │   └─── Other
-    └───Sensor Dimensions
-        ├─── Focal Length (optional)
-        ├─── Resolution
-        │    ├─── Height
-        │    └─── Width
-        ├─── mm
-        │    ├─── Height
-        │    ├─── Width
-        │    └─── Diagonal
-        └─── Inches
-            ├─── Height
-            ├─── Width
-            └─── Diagonal
+└─── Camera
+     ├─── Info
+     │    └─── Other
+     └─── Sensor Dimensions
+          ├─── Focal Length (optional)
+          ├─── Resolution
+          │    ├─── Height
+          │    └─── Width
+          ├─── mm
+          │    ├─── Height
+          │    ├─── Width
+          │    └─── Diagonal
+          └─── Inches
+               ├─── Height
+               ├─── Width
+               └─── Diagonal
 ```
 
 ## Formats

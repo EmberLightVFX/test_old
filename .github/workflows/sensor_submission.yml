@@ -41,49 +41,25 @@ jobs:
           cache: 'pip'
 
       - name: Process and update JSON with Python
-        continue-on-error: true
+        id: python
         run: |
           pip install -r ./scripts/requirements.txt
           python3 ./scripts/update_sensors_and_generatee_json.py "${{ github.event.issue.body }}"
-          if [ $? -ne 0 ]; then
-            echo "update_json_error<<EOF" >> $GITHUB_ENV
-              cat $ERROR_FILE >> $GITHUB_ENV
-              echo "EOF" >> $GITHUB_ENV
-              exit 1
-            fi
 
       - name: Generate csv
-        continue-on-error: true
+        id: csv
         run: |
           python3 scripts/generate_csv.py
-          if [ $? -ne 0 ]; then
-            echo "generate_csv_error<<EOF" >> $GITHUB_ENV
-              cat $ERROR_FILE >> $GITHUB_ENV
-              echo "EOF" >> $GITHUB_ENV
-              exit 1
-            fi
 
       - name: Generate yaml
-        continue-on-error: true
+        id: yaml
         run: |
           python3 scripts/generate_yaml.py
-          if [ $? -ne 0 ]; then
-            echo "generate_yaml_error<<EOF" >> $GITHUB_ENV
-              cat $ERROR_FILE >> $GITHUB_ENV
-              echo "EOF" >> $GITHUB_ENV
-              exit 1
-            fi
 
       - name: Generate markdown/documentation
-        continue-on-error: true
+        id: markdown
         run: |
           python3 scripts/generate_markdown.py
-          if [ $? -ne 0 ]; then
-            echo "generate_markdown_error<<EOF" >> $GITHUB_ENV
-            cat $ERROR_FILE >> $GITHUB_ENV
-            echo "EOF" >> $GITHUB_ENV
-            exit 1
-          fi
 
       - name: Create a safe branch name
         run: |
@@ -113,19 +89,18 @@ jobs:
         with:
           script: |
             const issueNumber = ${{ github.event.issue.number }};
-            const test = '${{ env.update_json_error }}';
             const errors = [];
-            if (process.env.update_json_error) {
-              errors.push('Error in update_sensors.py:\n${process.env.update_json_error}');
+            if ("${{ steps.python.outcome }}" == "failure") {
+              errors.push('Error in update_sensors.py:\n${{ steps.python.conclusion }}\n-------------------------');
             }
-            if (process.env.generate_csv_error) {
-              errors.push('Error in generate_csv.py:\n${process.env.generate_csv_error}');
+            if ("${{ steps.csv.outcome }}" == "failure") {
+              errors.push('Error in generate_csv.py:\n${{ steps.csv.conclusion }}\n-------------------------');
             }
-            if (process.env.generate_yaml_error) {
-              errors.push('Error in generate_yaml.py:\n${process.env.generate_yaml_error}');
+            if ("${{ steps.yaml.outcome }}" == "failure") {
+              errors.push('Error in generate_yaml.py:\n${{ steps.yaml.conclusion }}\n-------------------------');
             }
-            if (process.env.generate_markdown_error) {
-              errors.push('Error in generate_markdown.py:\n${process.env.generate_markdown_error}');
+            if ("${{ steps.markdown.outcome }}" == "failure") {
+              errors.push('Error in generate_markdown.py:\n${{ steps.markdown.conclusion }}\n-------------------------');
             }
             const commentBody = 'There was an error processing the sensor data:\n\n${errors.join('\n\n')}';
 

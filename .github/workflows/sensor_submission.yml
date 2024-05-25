@@ -100,7 +100,6 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
         with:
-          token: ${{ secrets.PAT }}
           commit-message: New sensor data for ${{ env.camera }} - ${{ env.vendor }}
           labels: submission
           branch: ${{ env.branch_name }}

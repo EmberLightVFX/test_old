@@ -87,6 +87,7 @@ jobs:
         if: ${{ failure() }}
         uses: actions/github-script@v6
         with:
+          github-token: ${{ secrets.PAT }}
           script: |
             const errors = [];
             if ("${{ steps.python.outcome }}" == "failure") {

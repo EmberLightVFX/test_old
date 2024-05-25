@@ -119,6 +119,7 @@ jobs:
         with:
           script: |
             const issueNumber = ${{ github.event.issue.number }};
+            const test = ${{ env.update_json_error }};
             const errors = [];
             if (process.env.update_json_error) {
               errors.push(`Error in update_sensors.py:\n${process.env.update_json_error}`);

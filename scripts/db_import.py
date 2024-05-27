@@ -6,11 +6,11 @@ import re
 import json
 
 DEBUG = False
-VENDOR = "Sony"
-CAMERA = "a6500"
+VENDOR = ""
+CAMERA = ""
 BODY = """
 
-23.5 mm x 15.6 mm (0.925 in x 0.614 in)
+
 
 """
 

@@ -65,17 +65,18 @@ for vendor, cameras in sensors.items():
             entries[i].append(f"{dim_data["mm"]["width"]} x {dim_data["mm"]["height"]} ({dim_data["mm"]["diagonal"]} diagonal)")
             entries[i].append(f"{dim_data["inches"]["width"]} x {dim_data["inches"]["height"]} ({dim_data["inches"]["diagonal"]} diagonal)")
 
+                
         # Check if there are any resolutions in the entry
-        found_data = all(entry[2] == "x" for entry in entries[1:])
-        if not found_data:
+        found_data = all(entry[2] == " x " for entry in entries[1:])
+        if found_data:
             for entry in entries:
                 entry.pop(2)
+        
         # Check if there are any focal length in the entry
         found_data = any(entry[1] for entry in entries[1:])
         if not found_data:
             for entry in entries:
                 entry.pop(1)
-            
             
         markdown_content = generate_markdown(vendor, camera, data.get("info", None), entries)
 

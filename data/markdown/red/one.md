@@ -2,5 +2,5 @@
 
 ## Resolution Dimensions
 
-| Name   | Resolution   | Sensor mm   | Sensor inches   |
-|--------|--------------|-------------|-----------------|
+| Name   | Sensor mm   | Sensor inches   |
+|--------|-------------|-----------------|

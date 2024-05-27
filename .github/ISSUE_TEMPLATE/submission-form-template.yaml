@@ -32,7 +32,7 @@ body:
       # description: Select the camera manufacturer.
       options:
         - ARRI
-        - Blackmagic Design
+        - Blackmagic
         - Canon
         - DJI
         - GoPro

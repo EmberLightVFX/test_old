@@ -20,6 +20,7 @@ jobs:
       - name: Generate csv
         id: csv
         run: |
+          pip install -r ./scripts/requirements.txt
           python3 scripts/generate_csv.py
 
       - name: Generate yaml

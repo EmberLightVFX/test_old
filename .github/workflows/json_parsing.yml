@@ -1,4 +1,4 @@
-name: Sensor Submission
+name: Json parsing
 
 on:
   workflow_dispatch:

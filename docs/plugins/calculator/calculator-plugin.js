@@ -1,10 +1,8 @@
 (function () {
     const calculator = function (hook, vm) {
-        const objects = {};
-        // [{"formula": "x", "result": "y"}]
-        const results = [];
+        let objects = {};
+        let results = []; // [{"formula": "x", "result": "y"}]
         let db = {};
-
 
         function runCode(code) {
             try {
@@ -39,22 +37,6 @@
                     results[i]["result"].value = 'Error in calculation';
                 }
             }
-        }
-
-        function injectBootstrap() {
-            const bootstrapCSS = document.createElement('link');
-            bootstrapCSS.rel = 'stylesheet';
-            bootstrapCSS.href = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css';
-            bootstrapCSS.rel = "stylesheet";
-            bootstrapCSS.integrity = "sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH";
-            bootstrapCSS.crossOrigin = "anonymous";
-            document.head.appendChild(bootstrapCSS);
-
-            const bootstrapJS = document.createElement('script');
-            bootstrapJS.src = "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js";
-            bootstrapJS.integrity = "sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz";
-            bootstrapJS.crossOrigin = "anonymous";
-            document.head.appendChild(bootstrapJS);
         }
 
         function updateList(list, content) {
@@ -454,19 +436,20 @@
 
         // Invoked on each page load before new markdown is transformed to HTML
         hook.beforeEach(function (content) {
+            Object.assign(objects, {});
+            results = [];
+
             return content.replace(/```calculator([\s\S]*?)```/g, function (match, code) {
-                return `<div class="calculator mt-2">${code.replace(/^\s+/gm, "").replace(/\n/g, "")}</div > `;
+                return `<div class="calculator mt-2" hidden>${code.replace(/^\s+/gm, "").trim()}</div>`;
             });
         });
 
         // Invoked on each page load after new HTML has been appended to the DOM
         hook.doneEach(function () {
-            //injectBootstrap();
-
             const calculators = document.querySelectorAll('.calculator');
             calculators.forEach(calculator => {
 
-                const data = JSON.parse("[\n" + calculator.innerText + "\n]");
+                const data = JSON.parse("[" + calculator.innerText.replace(/[\n\r\t]/g, "") + "]");
                 const elements = [];
                 data.forEach(obj => {
                     const createElement = elementFunctions[obj["element"]];
@@ -480,6 +463,7 @@
                 calculator.innerHTML = '';
 
                 elements.forEach(el => calculator.appendChild(el));
+                calculator.hidden = false;
             });
 
             // Run startup function if any

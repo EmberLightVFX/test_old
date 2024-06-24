@@ -1,4 +1,3 @@
-- [Calculator](/tools/calculator.md)
 - [ARRI](//)
   - [ALEXA 65](/arri/alexa65.md)
   - [ALEXA LF](/arri/alexalf.md)
@@ -185,3 +184,7 @@
   - [D7000](/nikon/d7000.md)
   - [D5100](/nikon/d5100.md)
   - [D90](/nikon/d90.md)
+
+- [Tools](//)
+  - [Resized sensor size calculator](/../../docs/tools/resized_sensor_size_calculator.md)
+  - [Calculator](/../../docs/tools/calculator.md)

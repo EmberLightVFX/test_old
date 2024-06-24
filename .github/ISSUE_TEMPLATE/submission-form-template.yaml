@@ -84,12 +84,12 @@ body:
 
   - type: checkboxes
     attributes:
-      label: Code of Conduct
+      label: Auto-generate sensor sizes
       description: |
         If the camera crops perfectly for each resolution change you fill out all information for dimension 1 and
         only name and resolution for the other ones. The sensor sizes will be automatically calculated.
       options:
-        - label: Auto-generate sensor sizes
+        - label: Do auto-generate sensor sizes
 
   #### Dimensions 1
   - type: markdown

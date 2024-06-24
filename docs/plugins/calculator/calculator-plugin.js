@@ -463,7 +463,7 @@
                 calculator.innerHTML = '';
 
                 elements.forEach(el => calculator.appendChild(el));
-                calculator.hidden = false;
+                //calculator.hidden = false;
             });
 
             // Run startup function if any

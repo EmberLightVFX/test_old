@@ -1,9 +1,10 @@
-<div align="center">
-    <img src="https://raw.githubusercontent.com/EmberLightVFX/test_old/main/assets/logo.svg?sanitize=true" alt="logo" title="Logo" height="250" />
-
-# Camera Sensor Database
-
-</div>
+<h1 align="center">
+  <br>
+  <a href="http://www.amitmerchant.com/electron-markdownify"><img src="https://raw.githubusercontent.com/EmberLightVFX/test_old/main/assets/logo.svg?sanitize=true" alt="Markdownify" width="250"></a>
+  <br>
+  Camera Sensor Database
+  </br>
+</h1>
 
 A collection of camera sensor information.
 

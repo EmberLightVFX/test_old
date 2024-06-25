@@ -1,7 +1,8 @@
 <div align="center">
-    <img src="./assets/logo.svg" alt="logo" title="Logo" height="250" />
+    <img src="https://raw.githubusercontent.com/EmberLightVFX/test_old/main/assets/logo.svg?sanitize=true" alt="logo" title="Logo" height="250" />
 
 # Camera Sensor Database
+
 </div>
 
 A collection of camera sensor information.

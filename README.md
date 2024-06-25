@@ -13,9 +13,9 @@
      <a href="https://github.com/EmberLightVFX/test_old/graphs/contributors">
           <img src="https://img.shields.io/github/contributors-anon/EmberLightVFX/test_old?color=d1a91d" alt="contributors"></a>
      <img alt="GitHub Issues or Pull Requests" src="https://img.shields.io/github/issues-pr/EmberLightVFX/test_old">
+     <img alt="GitHub License" src="https://img.shields.io/github/license/EmberLightVFX/test_old?color=097bbb">
      <a href="https://ko-fi.com/E1E0ZQTGC">
           <img alt="Static Badge" src="https://img.shields.io/badge/donate-fa615d?logo=ko-fi&logoColor=white"></a>
-     <img alt="GitHub License" src="https://img.shields.io/github/license/EmberLightVFX/test_old?color=097bbb">
 </p>
 
 <p align="center">

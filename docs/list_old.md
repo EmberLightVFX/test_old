@@ -186,4 +186,4 @@
   - [D90](/nikon/d90.md)
 
 - [Tools](//)
-  - [Undistorted sensor size](/../../docs/tools/undistorted_sensor_size.md)
+  - [Undistorted sensor size](/../../docs/tools/undistored_sensor_size.md)

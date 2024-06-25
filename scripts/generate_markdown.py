@@ -3,11 +3,13 @@ import os
 import re
 from typing import Any
 from tabulate import tabulate
+import glob
 
 data_folder = os.path.join(".", "data")
 json_file_path = os.path.join(data_folder, "sensors.json")
 markdown_folder = os.path.join(data_folder, "markdown")
 docs_folder = os.path.join(".", "docs")
+tools_folder = os.path.join(docs_folder, "tools")
 sidebar_file_path = os.path.join(docs_folder, "list.md")
 
 with open(json_file_path, "r") as file:
@@ -93,7 +95,10 @@ with open(sidebar_file_path, "w") as file:
         for camera in entry["nav_cam"]:
             file.write(f'  - [{camera["name"]}]({camera["filepath"]})\n')
         file.write("\n")
-    file.write("""- [Tools](//)
-  - [Resized sensor size calculator](/tools/resized_sensor_size_calculator.md)
-  - [Calculator](/tools/calculator.md)
-""")
+        
+    file.write("- [Tools](//)\n")
+    for file_path in glob.glob(os.path.join(tools_folder, '*.md')):
+        file_name = os.path.basename(file_path)
+        base_name = os.path.splitext(file_name)[0]
+        formatted_name = base_name.replace('_', ' ').title()
+        file.write(f"  - [{formatted_name}](/../../docs/tools/{file_name})\n")

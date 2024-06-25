@@ -40,7 +40,7 @@ This is a list of external projects using Camera Sensor Database:
 
 ## Data Structure
 
-```cmd
+```tree
 Vendor
 └─── Camera
      ├─── Info

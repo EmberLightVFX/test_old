@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="http://www.amitmerchant.com/electron-markdownify"><img src="https://raw.githubusercontent.com/EmberLightVFX/test_old/main/assets/logo.svg?sanitize=true" alt="Markdownify" width="250"></a>
+  <img src="https://raw.githubusercontent.com/EmberLightVFX/test_old/main/assets/logo.svg?sanitize=true" alt="Markdownify" width="250">
   <br>
   Camera Sensor Database
   </br>

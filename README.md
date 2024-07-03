@@ -18,13 +18,15 @@
           <img alt="Static Badge" src="https://img.shields.io/badge/donate-fa615d?logo=ko-fi&logoColor=white"></a>
 </p>
 
-<p align="center">
-  <a href="#web-docs">Web Docs</a> •
-  <a href="#external-projects">External Projects</a> •
-  <a href="#data-structure">Data Structure</a> •
-  <a href="#formats">Formats</a> •
-  <a href="#missing-sensor-data">Missing Sensor Data?</a>
-</p>
+<div style="text-align: center;">
+
+  [Web Docs](#web-docs) •
+  [External Projects](#external-projects) •
+  [Data Structure](#data-structure) •
+  [Formats](#formats) •
+  [Missing Sensor Data?](#missing-sensor-data)
+  
+</div>
 
 ## Web Docs
 

@@ -18,7 +18,7 @@
           <img alt="Static Badge" src="https://img.shields.io/badge/donate-fa615d?logo=ko-fi&logoColor=white"></a>
 </p>
 
-<div style="text-align: center;">
+<div align="center">
 
   [Web Docs](#web-docs) •
   [External Projects](#external-projects) •

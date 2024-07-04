@@ -15,7 +15,7 @@
             script.defer = true;
             script.setAttribute('src', $docsify.umami_src);
             script.setAttribute('src2', $docsify.umami_src);
-            script.setAttribute('data-website-id', $docsify.umami_id);
+            script.setAttribute('data-website-id', "hej");
             document.head.appendChild(script);
         });
 

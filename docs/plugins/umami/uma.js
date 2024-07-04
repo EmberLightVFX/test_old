@@ -13,7 +13,7 @@
         hook.mounted(function () {
             let script = document.createElement('script');
             script.defer = true;
-            script.src = $docsify.umami_src;
+            script.setAttribute('src', $docsify.umami_src);
             script.setAttribute('data-website-id', $docsify.umami_id);
             document.head.appendChild(script);
         });

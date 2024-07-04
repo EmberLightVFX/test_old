@@ -20,6 +20,7 @@
 
         // Invoked on each page load before new markdown is transformed to HTML.
         hook.beforeEach(function (markdown) {
+            console.log("before");
             umami.track();
         });
     };

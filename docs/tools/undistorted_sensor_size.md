@@ -1,6 +1,11 @@
-# Resized Sensor Size Calculator
+# Undistorted Sensor Size Calculator
 
-### Select/Enter default information
+Use this calculator to help you get the new sensor size after you have undistorted your footage.
+
+You can ether enter in the original resolution and sensor size or select it from the database using the lists.
+Next enter the new resolution of your footage and the new sensor size will automatically be calculated for you.
+
+### Select/Enter original information
 
 ```calculator
 {

@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build-css": "sass docs/plugins/calculator/bootstrap.scss docs/plugins/calculator/bootstrap.css"
+    "build-css": "sass docs/plugins/calculator/bootstrap.scss docs/plugins/calculator/bootstrap.css --style compressed"
   },
   "repository": {
     "type": "git",

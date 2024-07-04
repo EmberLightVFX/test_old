@@ -1,7 +1,7 @@
 (function () {
     let install = function (hook, vm) {
-        if (!$docsify.umami_url) {
-            console.error('[Docsify] Umami url is required.');
+        if (!$docsify.umami_src) {
+            console.error('[Docsify] Umami src is required.');
             return;
         }
         if (!$docsify.umami_id) {
